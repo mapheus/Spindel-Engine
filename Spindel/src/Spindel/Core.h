@@ -18,3 +18,4 @@
 	#define SP_CORE_ASSERT(x, ...)
 #endif
 #define BIT(x) (1 << x)
+#define SP_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)

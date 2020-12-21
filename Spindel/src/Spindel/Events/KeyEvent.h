@@ -53,7 +53,7 @@ namespace Spindel
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	/*
+	
 	class SPINDEL_API KeyTypedEvent : public KeyEvent
 	{
 	public:
@@ -69,5 +69,5 @@ namespace Spindel
 
 		EVENT_CLASS_TYPE(KeyTyped)
 	};
-	*/
+	
 }

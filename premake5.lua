@@ -12,8 +12,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Spindel/vendor/GLFW/include"
+IncludeDir["Glad"] = "Spindel/vendor/Glad/include"
+IncludeDir["ImGui"] = "Spindel/vendor/imgui"
 
 include "Spindel/vendor/GLFW"
+include "Spindel/vendor/Glad"
+include "Spindel/vendor/imgui"
 
 project "Spindel"
 	location "Spindel"
@@ -36,12 +40,16 @@ project "Spindel"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -54,7 +62,8 @@ project "Spindel"
 		{
 			"SP_PLATFORM_WINDOWS", 
 			"SP_BUILD_DLL",
-			"SP_ENABLE_ASSERTS"
+			"SP_ENABLE_ASSERTS",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -64,14 +73,17 @@ project "Spindel"
 
 	filter "configurations:Debug"
 		defines "SP_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "SP_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "SP_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -111,12 +123,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "SP_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "SP_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "SP_DIST"
+		buildoptions "/MD"
 		optimize "On"

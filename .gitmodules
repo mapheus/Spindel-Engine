@@ -1,3 +1,6 @@
 [submodule "Spindel/vendor/spdlog"]
 	path = Spindel/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Spindel/vendor/imgui"]
+	path = Spindel/vendor/imgui
+	url = https://github.com/TheCherno/imgui

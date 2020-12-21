@@ -3,6 +3,18 @@
 #include "Event.h"
 
 namespace Spindel {
+	class MouseButtonEvent : public Event
+	{
+	public:
+		int GetMouseButton() const { return m_Button; }
+
+		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
+	protected:
+		MouseButtonEvent(int button)
+			: m_Button(button) {}
+
+		int m_Button;
+	};
 
 	class MouseMovedEvent : public Event
 	{
@@ -48,18 +60,6 @@ namespace Spindel {
 		float m_XOffset, m_YOffset;
 	};
 
-	class MouseButtonEvent : public Event
-	{
-	public:
-		int GetMouseButton() const { return m_Button; }
-
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
-	protected:
-		MouseButtonEvent(int button)
-			: m_Button(button) {}
-
-		int m_Button;
-	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
