@@ -14,10 +14,12 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Spindel/vendor/GLFW/include"
 IncludeDir["Glad"] = "Spindel/vendor/Glad/include"
 IncludeDir["ImGui"] = "Spindel/vendor/imgui"
+IncludeDir["glm"] = "Spindel/vendor/glm"
 
 include "Spindel/vendor/GLFW"
 include "Spindel/vendor/Glad"
 include "Spindel/vendor/imgui"
+
 
 project "Spindel"
 	location "Spindel"
@@ -33,7 +35,9 @@ project "Spindel"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -42,7 +46,8 @@ project "Spindel"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -103,7 +108,9 @@ project "Sandbox"
 	includedirs
 	{
 		"Spindel/vendor/spdlog/include",
-		"Spindel/src"
+		"Spindel/src",
+		"Spindel/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links

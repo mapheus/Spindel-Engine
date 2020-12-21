@@ -4,3 +4,6 @@
 [submodule "Spindel/vendor/imgui"]
 	path = Spindel/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "Spindel/vendor/glm"]
+	path = Spindel/vendor/glm
+	url = https://github.com/g-truc/glm

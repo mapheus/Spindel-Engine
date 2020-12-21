@@ -1,5 +1,4 @@
 #pragma once
-#include "sppch.h"
 #include "Spindel/Core.h"
 
 namespace Spindel {

@@ -7,6 +7,8 @@
 #include "Events/Event.h"
 #include "Spindel/Events/ApplicationEvent.h"
 
+#include "Spindel/ImGui/ImGuiLayer.h"
+
 namespace Spindel {
 
 	class SPINDEL_API Application
@@ -28,6 +30,7 @@ namespace Spindel {
 		bool OnWindowClosed(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	private:
