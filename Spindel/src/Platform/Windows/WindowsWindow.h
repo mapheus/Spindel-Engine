@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Spindel/Window.h"
+#include "Spindel/Renderer/GraphicsContext.h"
 
 
 #include <GLFW/glfw3.h>
+
 
 namespace Spindel
 {
@@ -29,6 +31,7 @@ namespace Spindel
 		virtual void ShutDown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

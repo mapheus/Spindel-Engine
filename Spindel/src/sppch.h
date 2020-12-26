@@ -3,7 +3,6 @@
 #include "Spindel/Log.h"
 
 #include <iostream>
-#include <iostream>
 #include <memory>
 #include <utility>
 #include <algorithm>

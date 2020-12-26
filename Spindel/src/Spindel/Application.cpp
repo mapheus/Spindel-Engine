@@ -1,14 +1,16 @@
 #include "sppch.h"
 #include "Application.h"
 
-
-#include "glad/glad.h"
-
 #include "Input.h"
+
+#include "Spindel/Renderer/Renderer.h"
+
 
 namespace Spindel {
 
 	Application* Application::s_Instance = nullptr;
+
+
 
 	Application::Application() 
 	{
@@ -55,9 +57,6 @@ namespace Spindel {
 		
 		while (m_Running)
 		{
-			glClearColor(0.2, 0.2, 0.6, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
-
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 

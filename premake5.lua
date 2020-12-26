@@ -23,8 +23,10 @@ include "Spindel/vendor/imgui"
 
 project "Spindel"
 	location "Spindel"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -50,6 +52,11 @@ project "Spindel"
 		"%{IncludeDir.glm}"
 	}
 
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+
 	links
 	{
 		"GLFW",
@@ -59,8 +66,6 @@ project "Spindel"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -71,30 +76,28 @@ project "Spindel"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
 
 	filter "configurations:Debug"
 		defines "SP_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		buildoptions "/MTd"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "SP_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		buildoptions "/MT"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "SP_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		buildoptions "/MT"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -119,7 +122,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -130,15 +132,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "SP_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		buildoptions "/MTd"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "SP_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		buildoptions "/MT"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "SP_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		buildoptions "/MT"
+		optimize "on"

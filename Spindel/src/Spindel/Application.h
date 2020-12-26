@@ -9,6 +9,8 @@
 
 #include "Spindel/ImGui/ImGuiLayer.h"
 
+#include "Spindel/Renderer/PerspectiveCamera.h"
+
 namespace Spindel {
 
 	class SPINDEL_API Application
@@ -35,6 +37,7 @@ namespace Spindel {
 		LayerStack m_LayerStack;
 	private:
 		static Application* s_Instance;
+
 	};
 
 	// Define in client
