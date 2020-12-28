@@ -6,15 +6,15 @@
 class TestLayer : public Spindel::Layer
 {
 public:
-	TestLayer()	: Layer("Test"), m_Camera(90.f, 1080.f, 720.f, 0.1f, 1000.f)
+	TestLayer()	: Layer("Test"), m_Camera(45.f, 1080.f, 720.f, 0.1f, 1000.f)
 	{
 
 		float vertices[4 * 7] =
 		{
-			-10.5f, -0.5f, -20.f, 1.0f, 0.0f, 0.0f, 1.0f,
-			0.5f, -10.5f, -20.f, 0.0f, 1.0f, 0.0f, 1.0f,
-			0.5f, 0.5f, -20.f, 0.0f, 0.0f, 1.0f, 1.0f,
-			-10.5f, 20.5f, -20.f, 0.0f, 1.0f, 1.0f, 1.0f
+			-10.f, -10.f, -20.f, 1.0f, 0.0f, 0.0f, 1.0f,
+			10.f, -10.f, -20.f, 0.0f, 1.0f, 0.0f, 1.0f,
+			10.f, 10.f, -20.f, 0.0f, 0.0f, 1.0f, 1.0f,
+			-10.f, 10.f, -20.f, 0.0f, 1.0f, 1.0f, 1.0f
 		};
 
 		unsigned int indices[6] =
@@ -45,12 +45,13 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec4 v_Color;
 			void main()
 			{
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1);
+				gl_Position = u_ViewProjection *u_Transform* vec4(a_Position, 1);
 			}
 			)";
 
@@ -70,24 +71,21 @@ public:
 
 	void OnUpdate() override
 	{
-		if (Spindel::Input::IsKeyPressed(SP_KEY_D))
-			m_Camera.SetPosition(glm::vec3(m_Camera.GetPosition().x + 0.1f, m_Camera.GetPosition().y, m_Camera.GetPosition().z));
+		m_Camera.OnUpdate();
 
-		if (Spindel::Input::IsKeyPressed(SP_KEY_A))
-			m_Camera.SetPosition(glm::vec3(m_Camera.GetPosition().x - 0.1f, m_Camera.GetPosition().y, m_Camera.GetPosition().z));
+		if (Spindel::Input::IsKeyPressed(SP_KEY_E))
+			squarepos.y += 0.5;
+		if (Spindel::Input::IsKeyPressed(SP_KEY_Q))
+			squarepos.y -= 0.5;
+		pos1 = glm::translate(glm::mat4(1.0f), squarepos);
+	}
 
-		if (Spindel::Input::IsKeyPressed(SP_KEY_W))
-			m_Camera.SetPosition(glm::vec3(m_Camera.GetPosition().x, m_Camera.GetPosition().y, m_Camera.GetPosition().z -0.1f));
-
-		if (Spindel::Input::IsKeyPressed(SP_KEY_S))
-			m_Camera.SetPosition(glm::vec3(m_Camera.GetPosition().x, m_Camera.GetPosition().y, m_Camera.GetPosition().z + 0.1f));
-
-		Spindel::RenderCommand::SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
-		Spindel::RenderCommand::Clear();
-
-		Spindel::Renderer::BeginScene(m_Camera);
+	void OnRender() override
+	{
+		Spindel::Renderer::BeginScene(m_Camera.GetCamera());
 		shader->Bind();
-		Spindel::Renderer::Submit(shader, vao);
+		Spindel::Renderer::Submit(shader, vao, pos1);
+		Spindel::Renderer::Submit(shader, vao, pos2);
 		Spindel::Renderer::EndScene();
 	}
 
@@ -100,15 +98,20 @@ public:
 
 	void OnEvent(Spindel::Event& event) override
 	{
+		m_Camera.OnEvent(event);
 	}
 
 
 private:
-	Spindel::PerspectiveCamera m_Camera;
+	Spindel::PerspectiveFPSCameraController m_Camera;
 	std::shared_ptr<Spindel::VertexArray> vao;
 	std::shared_ptr<Spindel::VertexBuffer> vbo;
 	std::shared_ptr<Spindel::IndexBuffer> ibo;
 	std::shared_ptr<Spindel::Shader> shader;
+
+	glm::vec3 squarepos = glm::vec3(20, 0, 0);
+	glm::mat4 pos1 = glm::translate(glm::mat4(1.0f), squarepos);
+	glm::mat4 pos2 = glm::translate(glm::mat4(1.0f), glm::vec3(-10, 0, 0));
 };
 
 

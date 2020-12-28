@@ -2,7 +2,7 @@
 
 #include "sppch.h"
 
-#include "Spindel/Core.h"
+#include "Spindel/Core/Core.h"
 #include "Spindel/Events/Event.h"
 
 

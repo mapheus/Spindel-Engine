@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Spindel/Core.h"
-#include "Spindel/Layer.h"
+#include "Spindel/Core/Core.h"
+#include "Spindel/Core/Layer.h"
 
 #include <vector>
 

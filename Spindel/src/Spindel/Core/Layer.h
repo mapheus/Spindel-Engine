@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Spindel/Core.h"
+#include "Spindel/Core/Core.h"
 #include "Spindel/Events/Event.h"
 
 namespace Spindel
@@ -14,6 +14,7 @@ namespace Spindel
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
+		virtual void OnRender() {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

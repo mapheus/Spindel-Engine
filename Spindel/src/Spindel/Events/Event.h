@@ -1,5 +1,5 @@
 #pragma once
-#include "Spindel/Core.h"
+#include "Spindel/Core/Core.h"
 
 namespace Spindel {
 

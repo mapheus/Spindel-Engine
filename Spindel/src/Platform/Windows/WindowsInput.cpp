@@ -2,7 +2,7 @@
 #include "WindowsInput.h"
 
 #include <GLFW/glfw3.h>
-#include "Spindel/Application.h"
+#include "Spindel/Core/Application.h"
 
 namespace Spindel {
 

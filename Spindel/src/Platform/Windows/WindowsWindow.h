@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Spindel/Window.h"
+#include "Spindel/Core/Window.h"
 #include "Spindel/Renderer/GraphicsContext.h"
 
 

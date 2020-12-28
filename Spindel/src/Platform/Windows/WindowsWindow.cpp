@@ -1,6 +1,6 @@
 #include "sppch.h"
 #include "WindowsWindow.h"
-#include "Spindel/Log.h"
+#include "Spindel/Core/Log.h"
 
 #include "Spindel/Events/ApplicationEvent.h"
 #include "Spindel/Events/KeyEvent.h"
@@ -8,6 +8,7 @@
 
 #include "Platform/OpenGL/OpenGLContext.h"
 
+#include "glad/glad.h"
 
 namespace Spindel
 {
@@ -50,13 +51,15 @@ namespace Spindel
 			s_GLFWInitialized = true;
 		}
 
+		glfwWindowHint(GLFW_SAMPLES, 4);
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
-		SetVSync(true);
+		SetVSync(false);
+		glEnable(GL_MULTISAMPLE);
 
 		// Set GLFW Callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)

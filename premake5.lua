@@ -16,10 +16,11 @@ IncludeDir["Glad"] = "Spindel/vendor/Glad/include"
 IncludeDir["ImGui"] = "Spindel/vendor/imgui"
 IncludeDir["glm"] = "Spindel/vendor/glm"
 
-include "Spindel/vendor/GLFW"
-include "Spindel/vendor/Glad"
-include "Spindel/vendor/imgui"
-
+group "Dependencies"
+	include "Spindel/vendor/GLFW"
+	include "Spindel/vendor/Glad"
+	include "Spindel/vendor/imgui"
+group ""
 
 project "Spindel"
 	location "Spindel"

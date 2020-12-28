@@ -3,21 +3,24 @@
 // Used by other apps
 
 
-#include "Spindel/Application.h"
-#include "Spindel/Layer.h"
+#include "Spindel/Core/Application.h"
+#include "Spindel/Core/Layer.h"
 #include "Spindel/ImGui/ImGuiLayer.h"
+
+#include "Spindel/Core/Timestep.h"
 
 #include "Spindel/Renderer/Renderer.h"
 #include "Spindel/Renderer/Buffer.h"
 #include "Spindel/Renderer/Shader.h"
 #include "Spindel/Renderer/VertexArray.h"
 #include "Spindel/Renderer/PerspectiveCamera.h"
+#include "Spindel/Renderer/PerspectiveFPSCameraController.h"
 
-#include "Spindel/Log.h"
+#include "Spindel/Core/Log.h"
 
-#include "Spindel/Input.h"
-#include "Spindel/KeyCodes.h"
-#include "Spindel/MouseButtonCodes.h"
+#include "Spindel/Core/Input.h"
+#include "Spindel/Core/KeyCodes.h"
+#include "Spindel/Core/MouseButtonCodes.h"
 
 // ---ENTRY POINT--------
-#include "Spindel/EntryPoint.h"
+#include "Spindel/Core/EntryPoint.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include "Spindel/Input.h"
+#include "Spindel/Core/Input.h"
 
 namespace Spindel {
 	class WindowsInput : public Input

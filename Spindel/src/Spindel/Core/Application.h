@@ -3,13 +3,13 @@
 #include "Core.h"
 
 #include "Window.h"
-#include "Spindel/LayerStack.h"
-#include "Events/Event.h"
+#include "Spindel/Core/LayerStack.h"
+#include "Spindel/Events/Event.h"
 #include "Spindel/Events/ApplicationEvent.h"
 
 #include "Spindel/ImGui/ImGuiLayer.h"
 
-#include "Spindel/Renderer/PerspectiveCamera.h"
+#include "Spindel/Core/Timestep.h"
 
 namespace Spindel {
 
@@ -30,11 +30,15 @@ namespace Spindel {
 		inline static Application& Get() { return *s_Instance; }
 	private:
 		bool OnWindowClosed(WindowCloseEvent& e);
-
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+
+		double m_UpdatePeriod;
+		double m_Accumalator;
+		double m_LastFrameTime;
 	private:
 		static Application* s_Instance;
 
