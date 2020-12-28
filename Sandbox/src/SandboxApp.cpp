@@ -104,10 +104,10 @@ public:
 
 private:
 	Spindel::PerspectiveFPSCameraController m_Camera;
-	std::shared_ptr<Spindel::VertexArray> vao;
-	std::shared_ptr<Spindel::VertexBuffer> vbo;
-	std::shared_ptr<Spindel::IndexBuffer> ibo;
-	std::shared_ptr<Spindel::Shader> shader;
+	Spindel::Ref<Spindel::VertexArray> vao;
+	Spindel::Ref<Spindel::VertexBuffer> vbo;
+	Spindel::Ref<Spindel::IndexBuffer> ibo;
+	Spindel::Ref<Spindel::Shader> shader;
 
 	glm::vec3 squarepos = glm::vec3(20, 0, 0);
 	glm::mat4 pos1 = glm::translate(glm::mat4(1.0f), squarepos);

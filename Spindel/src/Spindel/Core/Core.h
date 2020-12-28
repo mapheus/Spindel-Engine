@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef SP_PLATFORM_WINDOWS
 	#if SP_DYNAMIC_LINK
 		#ifdef SP_BUILD_DLL
@@ -23,3 +25,12 @@
 #endif
 #define BIT(x) (1 << x)
 #define SP_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+
+namespace Spindel {
+
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}
