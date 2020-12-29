@@ -16,7 +16,7 @@ namespace Spindel {
 	class SPINDEL_API Application
 	{
 	public:
-		Application();
+		Application(const std::string& title = "Spindel App");
 		virtual ~Application();
 
 		void Run();
@@ -25,6 +25,8 @@ namespace Spindel {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+
+		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }

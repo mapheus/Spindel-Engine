@@ -1,4 +1,5 @@
 #pragma once
+#include "Spindel/Core/Core.h"
 
 #include "glm/glm.hpp"
 
@@ -20,6 +21,6 @@ namespace Spindel {
 
 		virtual const std::string& GetName() const = 0;
 
-		static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
+		static Ref<Shader> Create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};
 }

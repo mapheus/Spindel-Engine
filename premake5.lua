@@ -145,3 +145,58 @@ project "Sandbox"
 		defines "SP_DIST"
 		buildoptions "/MT"
 		optimize "on"
+
+
+		
+project "SpindelWeb"
+	location "SpindelWeb"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"Spindel/vendor/spdlog/include",
+		"Spindel/src",
+		"Spindel/vendor",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"Spindel"
+	}
+
+	filter "system:windows"
+		staticruntime "On"
+		systemversion "latest"
+
+		defines
+		{
+			"SP_PLATFORM_WINDOWS"
+		}
+
+	filter "configurations:Debug"
+		defines "SP_DEBUG"
+		buildoptions "/MTd"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "SP_RELEASE"
+		buildoptions "/MT"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "SP_DIST"
+		buildoptions "/MT"
+		optimize "on"

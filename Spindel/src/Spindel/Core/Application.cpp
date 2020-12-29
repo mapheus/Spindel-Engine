@@ -12,13 +12,14 @@ namespace Spindel {
 	Application* Application::s_Instance = nullptr;
 
 
-
-	Application::Application() 
+	Application::Application(const std::string& title) 
 		: m_Accumalator(0.0), m_UpdatePeriod(0.01)
 	{
 		SP_CORE_ASSERT(!s_Instance, "Application already exists.");
 		s_Instance = this;
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		WindowProps prop;
+		prop.Title = title;
+		m_Window = std::unique_ptr<Window>(Window::Create(prop));
 		m_Window->SetEventCallback(SP_BIND_EVENT_FN(Application::OnEvent));
 
 
@@ -63,9 +64,6 @@ namespace Spindel {
 		
 		while (m_Running)
 		{
-			Spindel::RenderCommand::SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
-			Spindel::RenderCommand::Clear();
-
 			float newTime = glfwGetTime();
 			Timestep timestep = newTime - m_LastFrameTime;
 			m_LastFrameTime = newTime;

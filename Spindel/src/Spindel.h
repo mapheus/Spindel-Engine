@@ -9,6 +9,7 @@
 
 #include "Spindel/Core/Timestep.h"
 
+#include "Spindel/Renderer/Framebuffer.h"
 #include "Spindel/Renderer/Renderer.h"
 #include "Spindel/Renderer/Buffer.h"
 #include "Spindel/Renderer/Shader.h"
@@ -22,5 +23,3 @@
 #include "Spindel/Core/KeyCodes.h"
 #include "Spindel/Core/MouseButtonCodes.h"
 
-// ---ENTRY POINT--------
-#include "Spindel/Core/EntryPoint.h"
