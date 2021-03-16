@@ -13,6 +13,7 @@
 #include "Spindel/Renderer/Renderer.h"
 #include "Spindel/Renderer/Buffer.h"
 #include "Spindel/Renderer/Shader.h"
+#include "Spindel/Renderer/Texture.h"
 #include "Spindel/Renderer/VertexArray.h"
 #include "Spindel/Renderer/PerspectiveCamera.h"
 #include "Spindel/Renderer/PerspectiveFPSCameraController.h"

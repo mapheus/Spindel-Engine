@@ -26,7 +26,7 @@ namespace Spindel {
 		Ref<VertexBuffer> vbo;
 		Ref<IndexBuffer> ibo;
 		Ref<Shader> shader;
-
+		Ref<Texture2D> tex;
 		glm::vec2 m_ViewportSize = { 0,0 };
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 

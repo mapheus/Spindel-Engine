@@ -7,10 +7,10 @@ TestLayer::TestLayer()
 
 	float vertices[4 * 7] =
 	{
-		-10.f, -10.f, -20.f, 1.0f, 0.0f, 0.0f, 1.0f,
-		10.f, -10.f, -20.f, 0.0f, 1.0f, 0.0f, 1.0f,
-		10.f, 10.f, -20.f, 0.0f, 0.0f, 1.0f, 1.0f,
-		-10.f, 10.f, -20.f, 0.0f, 1.0f, 1.0f, 1.0f
+		-10.f, -10.f, -20.f, 0.0f, 0.0f, 
+		10.f, -10.f, -20.f, 1.0f, 0.0f, 
+		10.f, 10.f, -20.f, 1.0f, 1.0f, 
+		-10.f, 10.f, -20.f, 0.0f, 1.0f
 	};
 
 	unsigned int indices[6] =
@@ -25,7 +25,7 @@ TestLayer::TestLayer()
 
 	Spindel::BufferLayout layout = {
 		{ Spindel::ShaderDataType::Float3, "a_Position" },
-		{ Spindel::ShaderDataType::Float4, "a_Color" }
+		{ Spindel::ShaderDataType::Float2, "a_Texcoords" }
 	};
 	vbo->SetLayout(layout);
 	vao->AddVertexBuffers(vbo);
@@ -34,35 +34,8 @@ TestLayer::TestLayer()
 	ibo = Spindel::IndexBuffer::Create(indices, 6);
 	vao->AddIndexBuffer(ibo);
 
-	std::string vsrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-
-			out vec4 v_Color;
-			void main()
-			{
-				v_Color = a_Color;
-				gl_Position = u_ViewProjection *u_Transform* vec4(a_Position, 1);
-			}
-			)";
-
-	std::string fsrc = R"(
-			#version 330 core
-			out vec4 f_Color;
-			
-			in vec4 v_Color;
-			void main()
-			{
-				f_Color = v_Color;
-			}
-			)";
-
-	shader = Spindel::Shader::Create(vsrc, fsrc);
+	shader = Spindel::Shader::Create("assets/shaders/Texture.glsl");
+	tex = Spindel::Texture2D::Create("assets/textures/bomb.png");
 
 }
 
@@ -83,6 +56,7 @@ void TestLayer::OnRender()
 	Spindel::RenderCommand::Clear();
 	Spindel::Renderer::BeginScene(m_Camera.GetCamera());
 	shader->Bind();
+	tex->Bind(0);
 	Spindel::Renderer::Submit(shader, vao, pos1);
 	Spindel::Renderer::Submit(shader, vao, pos2);
 	Spindel::Renderer::EndScene();

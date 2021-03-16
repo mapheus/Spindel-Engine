@@ -22,6 +22,7 @@ namespace Spindel {
 		m_Window = std::unique_ptr<Window>(Window::Create(prop));
 		m_Window->SetEventCallback(SP_BIND_EVENT_FN(Application::OnEvent));
 
+		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

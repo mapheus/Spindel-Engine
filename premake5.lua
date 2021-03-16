@@ -15,6 +15,7 @@ IncludeDir["GLFW"] = "Spindel/vendor/GLFW/include"
 IncludeDir["Glad"] = "Spindel/vendor/Glad/include"
 IncludeDir["ImGui"] = "Spindel/vendor/imgui"
 IncludeDir["glm"] = "Spindel/vendor/glm"
+IncludeDir["stb_image"] = "Spindel/vendor/stb_image"
 
 group "Dependencies"
 	include "Spindel/vendor/GLFW"
@@ -39,6 +40,8 @@ project "Spindel"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.hpp",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -50,7 +53,8 @@ project "Spindel"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	defines

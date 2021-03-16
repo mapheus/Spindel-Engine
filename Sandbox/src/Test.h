@@ -24,6 +24,7 @@ private:
 	Spindel::Ref<Spindel::VertexBuffer> vbo;
 	Spindel::Ref<Spindel::IndexBuffer> ibo;
 	Spindel::Ref<Spindel::Shader> shader;
+	Spindel::Ref<Spindel::Texture2D> tex;
 
 	glm::vec3 squarepos = glm::vec3(20, 0, 0);
 	glm::mat4 pos1 = glm::translate(glm::mat4(1.0f), squarepos);
