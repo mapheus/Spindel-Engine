@@ -41,6 +41,7 @@ namespace Spindel {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(SP_BIND_EVENT_FN(Application::OnWindowClosed));
+		dispatcher.Dispatch<WindowResizeEvent>(SP_BIND_EVENT_FN(Application::OnWindowResized));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
@@ -95,6 +96,12 @@ namespace Spindel {
 	bool Application::OnWindowClosed(WindowCloseEvent& e)
 	{
 		m_Running = false;
+		return true;
+	}
+
+	bool Application::OnWindowResized(WindowResizeEvent& e)
+	{
+		Renderer::OnWindowResized(e.GetWidth(), e.GetHeight());
 		return true;
 	}
 }

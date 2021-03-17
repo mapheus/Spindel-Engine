@@ -32,6 +32,7 @@ namespace Spindel {
 		inline static Application& Get() { return *s_Instance; }
 	private:
 		bool OnWindowClosed(WindowCloseEvent& e);
+		bool OnWindowResized(WindowResizeEvent& e);
 	private:
 		Ref<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
