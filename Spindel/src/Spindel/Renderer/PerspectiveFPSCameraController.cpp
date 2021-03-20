@@ -22,7 +22,7 @@ namespace Spindel {
 			m_CameraPosition += m_CameraFront*m_CameraTranslationSpeed;
 		if (Input::IsKeyPressed(SP_KEY_S))
 			m_CameraPosition -= m_CameraFront*m_CameraTranslationSpeed;
-			
+
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetViewMatrix(GetViewMatrix());
 	}

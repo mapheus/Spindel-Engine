@@ -1,35 +1,42 @@
 #pragma once
-#include "Spindel/Core/Core.h"
-
 #include "Spindel/Renderer/Mesh.h"
 #include "Spindel/Renderer/VertexArray.h"
 #include "Spindel/Renderer/Buffer.h"
 
-#include <string>
-#include <vector>
-
 #include "glm/glm.hpp"
 
-namespace Spindel {
-	class OpenGLMesh : Mesh
+#include "Spindel/Renderer/Texture.h"
+#include "Spindel/Renderer/Shader.h"
+
+#include "Spindel/Core/Core.h"
+
+namespace Spindel
+{
+
+	struct Vertex {
+		glm::vec3 Position;
+		glm::vec3 Normal;
+		glm::vec2 TexCoords;
+		glm::vec3 Tangent;
+		glm::vec3 Bitangent;
+	};
+
+	class OpenGLMesh : public Mesh
 	{
 	public:
-		OpenGLMesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<class Texture*>& textures);
+		OpenGLMesh();
+		OpenGLMesh(Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures);
 		virtual ~OpenGLMesh();
 
-	private:
-		virtual void SetupMesh() override;
+		void Draw(const glm::mat4& transform) override;
 	private:
 		Ref<VertexArray> m_Vao;
 		Ref<VertexBuffer> m_Vbo;
 		Ref<IndexBuffer> m_Ibo;
-		std::vector<Texture> m_Tex;
+		Ref<BufferLayout> m_Layout;
 
-		// mesh Data
-		std::vector<Vertex>       vertices;
-		std::vector<unsigned int> indices;
-		std::vector<Texture*> textures;
+		std::vector<Ref<Texture2D>> m_Textures;
 
+		std::string m_Name;
 	};
-
 }

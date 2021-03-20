@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SP_PLATFORM_WINDOWS;SP_BUILD_DLL;SP_ENABLE_ASSERTS;GLFW_INCLUDE_NONE;SP_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -98,7 +98,7 @@
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SP_PLATFORM_WINDOWS;SP_BUILD_DLL;SP_ENABLE_ASSERTS;GLFW_INCLUDE_NONE;SP_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,7 +123,7 @@
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SP_PLATFORM_WINDOWS;SP_BUILD_DLL;SP_ENABLE_ASSERTS;GLFW_INCLUDE_NONE;SP_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -146,6 +146,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLMesh.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
@@ -170,8 +171,11 @@
     <ClInclude Include="src\Spindel\Events\MouseEvent.h" />
     <ClInclude Include="src\Spindel\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Spindel\Renderer\Buffer.h" />
+    <ClInclude Include="src\Spindel\Renderer\Camera.h" />
+    <ClInclude Include="src\Spindel\Renderer\EditorCamera.h" />
     <ClInclude Include="src\Spindel\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Spindel\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Spindel\Renderer\Mesh.h" />
     <ClInclude Include="src\Spindel\Renderer\PerspectiveCamera.h" />
     <ClInclude Include="src\Spindel\Renderer\PerspectiveFPSCameraController.h" />
     <ClInclude Include="src\Spindel\Renderer\RenderCommand.h" />
@@ -180,6 +184,9 @@
     <ClInclude Include="src\Spindel\Renderer\Shader.h" />
     <ClInclude Include="src\Spindel\Renderer\Texture.h" />
     <ClInclude Include="src\Spindel\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Spindel\Scene\Components.h" />
+    <ClInclude Include="src\Spindel\Scene\Entity.h" />
+    <ClInclude Include="src\Spindel\Scene\Scene.h" />
     <ClInclude Include="src\sppch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
@@ -599,6 +606,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLMesh.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
@@ -612,7 +620,9 @@
     <ClCompile Include="src\Spindel\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Spindel\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Spindel\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Spindel\Renderer\Mesh.cpp" />
     <ClCompile Include="src\Spindel\Renderer\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Spindel\Renderer\PerspectiveFPSCameraController.cpp" />
     <ClCompile Include="src\Spindel\Renderer\RenderCommand.cpp" />
@@ -621,6 +631,8 @@
     <ClCompile Include="src\Spindel\Renderer\Shader.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Texture.cpp" />
     <ClCompile Include="src\Spindel\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Spindel\Scene\Entity.cpp" />
+    <ClCompile Include="src\Spindel\Scene\Scene.cpp" />
     <ClCompile Include="src\sppch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

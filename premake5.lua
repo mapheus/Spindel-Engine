@@ -16,6 +16,7 @@ IncludeDir["Glad"] = "Spindel/vendor/Glad/include"
 IncludeDir["ImGui"] = "Spindel/vendor/imgui"
 IncludeDir["glm"] = "Spindel/vendor/glm"
 IncludeDir["stb_image"] = "Spindel/vendor/stb_image"
+IncludeDir["entt"] = "Spindel/vendor/entt/include"
 
 group "Dependencies"
 	include "Spindel/vendor/GLFW"
@@ -54,7 +55,8 @@ project "Spindel"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 	}
 
 	defines
@@ -118,7 +120,8 @@ project "Sandbox"
 		"Spindel/vendor/spdlog/include",
 		"Spindel/src",
 		"Spindel/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -173,7 +176,8 @@ project "SpindelWeb"
 		"Spindel/vendor/spdlog/include",
 		"Spindel/src",
 		"Spindel/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links

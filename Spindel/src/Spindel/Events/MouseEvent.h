@@ -1,5 +1,5 @@
 #pragma once
-
+#include <sstream>
 #include "Event.h"
 
 namespace Spindel {
@@ -30,6 +30,7 @@ namespace Spindel {
 			std::stringstream ss;
 			ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
 			return ss.str();
+			return "";
 		}
 
 		EVENT_CLASS_TYPE(MouseMoved)

@@ -93,9 +93,14 @@ namespace Spindel {
 		}
 	}
 
-	bool Application::OnWindowClosed(WindowCloseEvent& e)
+	void Application::Close()
 	{
 		m_Running = false;
+	}
+
+	bool Application::OnWindowClosed(WindowCloseEvent& e)
+	{
+		Close();
 		return true;
 	}
 

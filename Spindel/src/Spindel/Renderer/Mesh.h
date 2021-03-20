@@ -1,28 +1,21 @@
 #pragma once
 
-#include "Spindel/Core/Core.h"
-
 #include "glm/glm.hpp"
+#include "Spindel/Renderer/Buffer.h"
+#include "Spindel/Renderer/VertexArray.h"
+#include "Spindel/Renderer/Texture.h"
 
 namespace Spindel {
-
-	struct Vertex {
-		glm::vec3 Position;
-		glm::vec3 Normal;
-		glm::vec2 TexCoords;
-		glm::vec3 Tangent;
-		glm::vec3 Bitangent;
-	};
-
 
 	class Mesh
 	{
 	public:
 		virtual ~Mesh() = default;
 
-		static Ref<Mesh> Create(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<class Texture*>& textures);
-	private:
-		virtual void SetupMesh() = 0;
+		virtual void Draw(const glm::mat4& transform) = 0;
 
+		static Ref<Mesh> Create();
+		static Ref<Mesh> Create(Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures);
+	private:
 	};
 }

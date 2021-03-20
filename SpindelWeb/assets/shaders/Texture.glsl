@@ -20,8 +20,8 @@ in vec2 v_Texcoords;
 
 out vec4 f_Color;
 
-uniform sampler2D tex;
+uniform sampler2D u_Texture;
 void main()
 {
-	f_Color = texture(tex, v_Texcoords);
+	f_Color = texture(u_Texture, v_Texcoords);
 }

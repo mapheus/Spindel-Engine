@@ -1,6 +1,9 @@
 #pragma once
 #include "Spindel.h"
 #include "imgui/imgui.h"
+#include "Panels/SceneHierarchyPanel.h"
+
+#include "Spindel/Renderer/EditorCamera.h"
 
 namespace Spindel {
 	class EditorLayer : public Layer
@@ -21,14 +24,16 @@ namespace Spindel {
 
 	private:
 		PerspectiveFPSCameraController m_Camera;
+		EditorCamera m_EditorCamera;
+
 		Ref<Framebuffer> m_Framebuffer;
-		Ref<VertexArray> vao;
-		Ref<VertexBuffer> vbo;
-		Ref<IndexBuffer> ibo;
-		Ref<Shader> shader;
-		Ref<Texture2D> tex;
+
 		glm::vec2 m_ViewportSize = { 0,0 };
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
+
+		Ref<Scene> m_ActiveScene;
+		Entity m_TestEntity;
+		SceneHierarchyPanel m_SceneHierarchyPanel;
 
 		glm::vec3 squarepos = glm::vec3(20, 0, 0);
 		glm::mat4 pos1 = glm::translate(glm::mat4(1.0f), squarepos);

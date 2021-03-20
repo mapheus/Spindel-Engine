@@ -24,3 +24,7 @@
 #include "Spindel/Core/KeyCodes.h"
 #include "Spindel/Core/MouseButtonCodes.h"
 
+#include "Spindel/Scene/Scene.h"
+#include "Spindel/Scene/Entity.h"
+#include "Spindel/Scene/Components.h"
+

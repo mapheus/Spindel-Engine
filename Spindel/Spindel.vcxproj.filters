@@ -28,6 +28,9 @@
     <Filter Include="src\Spindel\Renderer">
       <UniqueIdentifier>{F10786D9-DD96-0FA3-86B5-239E72232049}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Spindel\Scene">
+      <UniqueIdentifier>{489DE91D-B4B3-E7B3-FD2A-73D56980B83B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
@@ -164,6 +167,15 @@
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\VertexArray.h">
       <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Scene\Components.h">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Scene\Entity.h">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Scene\Scene.h">
+      <Filter>src\Spindel\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\sppch.h">
       <Filter>src</Filter>
@@ -1407,6 +1419,12 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\Mesh.h">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLMesh.h" />
+    <ClInclude Include="src\Spindel\Renderer\Camera.h" />
+    <ClInclude Include="src\Spindel\Renderer\EditorCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1484,11 +1502,22 @@
     <ClCompile Include="src\Spindel\Renderer\VertexArray.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Scene\Entity.cpp">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Scene\Scene.cpp">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\sppch.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Renderer\Mesh.cpp">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLMesh.cpp" />
+    <ClCompile Include="src\Spindel\Renderer\EditorCamera.cpp" />
   </ItemGroup>
 </Project>

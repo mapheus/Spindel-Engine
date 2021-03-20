@@ -17,6 +17,7 @@ namespace Spindel {
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
+		: m_Name("Shader")
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSource;
@@ -25,10 +26,12 @@ namespace Spindel {
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& path)
+		: m_Name("Shader")
 	{
 		std::string source = ReadFile(path);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);
+		
 	}
 
 	std::string OpenGLShader::ReadFile(const std::string& path)
