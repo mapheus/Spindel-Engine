@@ -6,19 +6,28 @@
 
 namespace Spindel
 {
-	OpenGLMesh::OpenGLMesh()
+	OpenGLMesh::OpenGLMesh(const std::string& name)
 	{
-		float vertices[4 * 5] =
+		float vertices[8 * 5] =
 		{
-		-10.f, -10.f, -20.f, 0.0f, 0.0f,
-		10.f, -10.f, -20.f, 1.0f, 0.0f,
-		10.f, 10.f, -20.f, 1.0f, 1.0f,
-		-10.f, 10.f, -20.f, 0.0f, 1.0f
+		-10.f, -10.f, -10.f, 0.0f, 0.0f,
+		10.f, -10.f, -10.f, 1.0f, 0.0f,
+		10.f, 10.f, -10.f, 1.0f, 1.0f,
+		-10.f, 10.f, -10.f, 0.0f, 1.0f,
+		-10.f, -10.f, 10.f, 0.0f, 0.0f,
+		10.f, -10.f, 10.f, 1.0f, 0.0f,
+		10.f, 10.f, 10.f, 1.0f, 1.0f,
+		-10.f, 10.f, 10.f, 0.0f, 1.0f
 		};
 
-		unsigned int indices[6] =
+		unsigned int indices[6*6] =
 		{
-			0, 1, 2, 2, 3, 0
+			0, 1, 2, 2, 3, 0,
+			0, 1, 4, 1, 5, 4,
+			1, 5, 2, 5, 6, 2,
+			3, 2, 7, 2, 6, 7,
+			4, 0, 7, 0, 3, 7,
+			5, 4, 6, 4, 7, 6
 		};
 
 
@@ -34,25 +43,28 @@ namespace Spindel
 		m_Vao->AddVertexBuffers(m_Vbo);
 
 
-		m_Ibo = IndexBuffer::Create(indices, 6);
+		m_Ibo = IndexBuffer::Create(indices, 36);
 		m_Vao->AddIndexBuffer(m_Ibo);
-		m_Textures.push_back(Texture2D::Create("assets/textures/bomb.png"));
+		m_Textures.push_back(Texture2D::Create("assets/textures/mgsus.png"));
 
-		m_Name = "Default";
+		m_Name = name;
 	}
 
-	OpenGLMesh::OpenGLMesh(Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures)
+	OpenGLMesh::OpenGLMesh(const std::string& name, Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures)
 		: m_Vao(vao), m_Vbo(vbo), m_Ibo(ibo)
 	{
 		for (auto& i : textures)
+		{
 			m_Textures.push_back(i);
+		}
 
-		m_Name = "Default";
+		m_Name = name;
 	}
 	OpenGLMesh::~OpenGLMesh()
 	{
 
 	}
+
 	void OpenGLMesh::Draw(const glm::mat4& transform)
 	{
 		Renderer::Submit(m_Vao, transform, m_Textures);

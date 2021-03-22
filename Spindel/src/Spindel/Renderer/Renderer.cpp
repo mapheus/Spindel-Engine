@@ -78,15 +78,15 @@ namespace Spindel {
 		s_Data.TextureShader->SetMat4("u_Transform", transform);
 		for (unsigned int i = 0; i < texs.size(); i++)
 		{
-			texs[i]->Bind();
+			texs[i]->Bind(i);
 		}
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}
 
-	void Renderer::DrawMesh(const Ref<Mesh>& mesh, const glm::mat4& transform)
+	void Renderer::DrawMesh(const Ref<Model>& model, const glm::mat4& transform)
 	{
-		mesh->Draw(transform);
+		model->Draw(transform);
 	}
 
 }

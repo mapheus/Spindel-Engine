@@ -4,15 +4,15 @@
 #include <stb_image.h>
 
 namespace Spindel {
-	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
-		: m_Path(path)
+	OpenGLTexture2D::OpenGLTexture2D(const std::string& path, const std::string& name)
+		: m_Path(path), m_Name(name)
 	{
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
 		stbi_uc* data = nullptr;
 
 		data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-		SP_CORE_ASSERT(data, "Failed to load image!");
+		SP_CORE_ASSERT(data, "Failed to load image! Path: {0}", path.c_str());
 
 		m_Width = width;
 		m_Height = height;

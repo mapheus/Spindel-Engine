@@ -5,6 +5,7 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include "Spindel/Renderer/Mesh.h"
+#include "Spindel/Renderer/MeshManager.h"
 
 namespace Spindel {
 
@@ -41,14 +42,21 @@ namespace Spindel {
 
 	struct MeshComponent
 	{
-		Ref<Mesh> mesh;
+		Ref<Model> model;
 		bool visible = true;
+		bool isModel = false;
+
+		int index = 0;
+		int prev_index = 0;
 		MeshComponent(const MeshComponent&) = default;
 		MeshComponent()
 		{
-			mesh = Mesh::Create();
+			Ref<Model> m = MeshManager::GetModel("box.fbx");
+			if (m == nullptr)
+				model = MeshManager::CreateModel("assets/models/box/box.fbx");
+			else
+				model = m;
+				
 		}
-
-		Ref<Mesh> GetMesh() { return mesh; }
 	};
 }

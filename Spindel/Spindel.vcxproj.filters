@@ -66,6 +66,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLMesh.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -138,10 +141,25 @@
     <ClInclude Include="src\Spindel\Renderer\Buffer.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\Camera.h">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\EditorCamera.h">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Framebuffer.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\GraphicsContext.h">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\Mesh.h">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\MeshManager.h">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\Model.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\PerspectiveCamera.h">
@@ -1419,12 +1437,8 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\Mesh.h">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLMesh.h" />
-    <ClInclude Include="src\Spindel\Renderer\Camera.h" />
-    <ClInclude Include="src\Spindel\Renderer\EditorCamera.h" />
+    <ClInclude Include="src\Spindel\Assets\Asset.h" />
+    <ClInclude Include="src\Spindel\Assets\AssetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1434,6 +1448,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLMesh.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1475,7 +1492,19 @@
     <ClCompile Include="src\Spindel\Renderer\Buffer.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Renderer\EditorCamera.cpp">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Framebuffer.cpp">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Renderer\Mesh.cpp">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Renderer\MeshManager.cpp">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Renderer\Model.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\PerspectiveCamera.cpp">
@@ -1514,10 +1543,6 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\Mesh.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLMesh.cpp" />
-    <ClCompile Include="src\Spindel\Renderer\EditorCamera.cpp" />
+    <ClCompile Include="src\Spindel\Assets\AssetManager.cpp" />
   </ItemGroup>
 </Project>

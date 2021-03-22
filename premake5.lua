@@ -17,6 +17,7 @@ IncludeDir["ImGui"] = "Spindel/vendor/imgui"
 IncludeDir["glm"] = "Spindel/vendor/glm"
 IncludeDir["stb_image"] = "Spindel/vendor/stb_image"
 IncludeDir["entt"] = "Spindel/vendor/entt/include"
+IncludeDir["assimp"] = "Spindel/vendor/assimp/include"
 
 group "Dependencies"
 	include "Spindel/vendor/GLFW"
@@ -56,7 +57,8 @@ project "Spindel"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.assimp}"
 	}
 
 	defines
@@ -64,12 +66,18 @@ project "Spindel"
 		"_CRT_SECURE_NO_WARNINGS"
 	}
 
+	libdirs
+	{
+		"%{prj.name}/vendor/assimp/lib"
+	}
+
 	links
 	{
 		"GLFW",
 		"Glad",
 		"ImGui",
-		"opengl32.lib"
+		"opengl32.lib",
+		"assimp-vc142-mtd.lib"
 	}
 
 	filter "system:windows"
@@ -120,8 +128,7 @@ project "Sandbox"
 		"Spindel/vendor/spdlog/include",
 		"Spindel/src",
 		"Spindel/vendor",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -177,7 +184,8 @@ project "SpindelWeb"
 		"Spindel/src",
 		"Spindel/vendor",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.assimp}"
 	}
 
 	links

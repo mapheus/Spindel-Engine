@@ -4,6 +4,7 @@
 #include "Input.h"
 
 #include "Spindel/Renderer/Renderer.h"
+#include "Spindel/Renderer/MeshManager.h"
 
 #include "GLFW/glfw3.h"
 
@@ -23,6 +24,7 @@ namespace Spindel {
 		m_Window->SetEventCallback(SP_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
+		MeshManager::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

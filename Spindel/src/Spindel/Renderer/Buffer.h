@@ -1,7 +1,16 @@
 #pragma once
 
+#include "glm/glm.hpp"
 
 namespace Spindel {
+
+	struct Vertex {
+		glm::vec3 Position;
+		glm::vec3 Normal;
+		glm::vec2 TexCoords;
+		glm::vec3 Tangent;
+		glm::vec3 Bitangent;
+	};
 
 	enum class ShaderDataType
 	{
@@ -114,6 +123,7 @@ namespace Spindel {
 		virtual const BufferLayout& GetLayout() const = 0;
 
 		static Ref<VertexBuffer> Create(float* vertices, size_t size);
+		static Ref<VertexBuffer> Create(std::vector<Vertex> vertices, size_t size);
 	};
 
 	class IndexBuffer
@@ -127,5 +137,7 @@ namespace Spindel {
 		virtual uint32_t GetCount() const = 0;
 
 		static Ref<IndexBuffer> Create(uint32_t* indices, uint32_t count);
+		static Ref<IndexBuffer> Create(std::vector<uint32_t> indices);
+		
 	};
 }

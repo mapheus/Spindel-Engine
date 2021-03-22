@@ -7,6 +7,7 @@ namespace Spindel {
 	{
 	public:
 		OpenGLVertexBuffer(float* vertices, size_t size);
+		OpenGLVertexBuffer(std::vector<Vertex> vertices, size_t size);
 		virtual ~OpenGLVertexBuffer();
 
 		virtual void Bind() const override;
@@ -23,6 +24,8 @@ namespace Spindel {
 	{
 	public:
 		OpenGLIndexBuffer(uint32_t* indices, uint32_t count);
+		OpenGLIndexBuffer(std::vector<uint32_t> indices);
+		
 		virtual ~OpenGLIndexBuffer();
 
 		virtual void Bind() const override;

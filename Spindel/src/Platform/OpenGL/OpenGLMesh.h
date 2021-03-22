@@ -13,22 +13,16 @@
 namespace Spindel
 {
 
-	struct Vertex {
-		glm::vec3 Position;
-		glm::vec3 Normal;
-		glm::vec2 TexCoords;
-		glm::vec3 Tangent;
-		glm::vec3 Bitangent;
-	};
 
 	class OpenGLMesh : public Mesh
 	{
 	public:
-		OpenGLMesh();
-		OpenGLMesh(Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures);
+		OpenGLMesh(const std::string& name);
+		OpenGLMesh(const std::string& name, Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures);
 		virtual ~OpenGLMesh();
 
 		void Draw(const glm::mat4& transform) override;
+		std::string& GetName() override { return m_Name; }
 	private:
 		Ref<VertexArray> m_Vao;
 		Ref<VertexBuffer> m_Vbo;
@@ -38,5 +32,7 @@ namespace Spindel
 		std::vector<Ref<Texture2D>> m_Textures;
 
 		std::string m_Name;
+
+		int m_Index;
 	};
 }

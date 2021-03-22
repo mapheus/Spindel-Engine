@@ -4,7 +4,7 @@ namespace Spindel {
 
 
 	EditorLayer::EditorLayer()
-		: Layer("SpindelWeb"), m_Camera(45.f, 1080.f, 720.f, 0.1f, 1000.f)
+		: Layer("SpindelWeb"), m_Camera(45.f, 1280.f, 720.f, 0.1f, 1000.f)
 	{
 	}
 

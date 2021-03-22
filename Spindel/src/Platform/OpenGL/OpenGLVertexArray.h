@@ -15,6 +15,8 @@ namespace Spindel {
 		virtual void AddVertexBuffers(const Ref<VertexBuffer>& vertexBuffer) override;
 		virtual void AddIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
+		virtual uint32_t GetID() override { return m_RendererID; }
+
 		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const { return m_VertexBuffers; };
 		virtual const Ref<IndexBuffer>& GetIndexBuffer() const { return m_IndexBuffer; }
 	private:

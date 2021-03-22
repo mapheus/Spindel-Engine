@@ -42,7 +42,7 @@ namespace Spindel
 
 			if (mesh.visible)
 			{
-				Renderer::DrawMesh(mesh.GetMesh(), transform.GetTransform());
+				//Renderer::DrawMesh(mesh.GetMesh(), transform.GetTransform());
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace Spindel
 
 			if (mesh.visible)
 			{
-				Renderer::DrawMesh(mesh.GetMesh(), transform.GetTransform());
+				Renderer::DrawMesh(mesh.model, transform.GetTransform());
 			}
 		}
 
