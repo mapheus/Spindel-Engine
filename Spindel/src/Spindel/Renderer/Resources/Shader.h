@@ -1,11 +1,12 @@
 #pragma once
 #include "Spindel/Core/Core.h"
+#include "Spindel/Core/IO/Resource.h"
 
 #include "glm/glm.hpp"
 
 namespace Spindel {
 
-	class Shader
+	class Shader : public Resource
 	{
 	public:
 		virtual ~Shader() = default;

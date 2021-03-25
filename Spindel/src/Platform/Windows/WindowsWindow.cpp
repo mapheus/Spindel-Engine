@@ -1,6 +1,6 @@
 #include "sppch.h"
 #include "WindowsWindow.h"
-#include "Spindel/Core/Log.h"
+#include "Spindel/Core/IO/Log.h"
 
 #include "Spindel/Events/ApplicationEvent.h"
 #include "Spindel/Events/KeyEvent.h"

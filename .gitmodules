@@ -7,3 +7,6 @@
 [submodule "Spindel/vendor/glm"]
 	path = Spindel/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "Spindel/vendor/ImGuizmo"]
+	path = Spindel/vendor/ImGuizmo
+	url = https://github.com/mapheus/ImGuizmo

@@ -16,8 +16,14 @@
     <Filter Include="src\Spindel">
       <UniqueIdentifier>{EB2B070F-57E1-7F04-E0D5-79DB4C8A7608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Spindel\Assets">
+      <UniqueIdentifier>{6D7C49B2-5960-0A08-C2C0-045BAEC3F489}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Spindel\Core">
       <UniqueIdentifier>{237BDF00-0F74-FE52-38A6-E3D724FEDD5E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Spindel\Core\IO">
+      <UniqueIdentifier>{EA9D058C-56FF-E299-DF6C-294C4BCD1959}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Spindel\Events">
       <UniqueIdentifier>{6FE1CCBB-5BC5-8D11-C425-8864B0287893}</UniqueIdentifier>
@@ -25,14 +31,29 @@
     <Filter Include="src\Spindel\ImGui">
       <UniqueIdentifier>{55A5391D-C1BB-37B3-0A33-C3D47688083B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Spindel\Math">
+      <UniqueIdentifier>{A4BBE400-90B4-0353-B9E6-E8D7A53EE35E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Spindel\Renderer">
       <UniqueIdentifier>{F10786D9-DD96-0FA3-86B5-239E72232049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Spindel\Renderer\Resources">
+      <UniqueIdentifier>{9B8EE2F1-87B4-AC58-70FA-31245CBFD124}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Spindel\Scene">
       <UniqueIdentifier>{489DE91D-B4B3-E7B3-FD2A-73D56980B83B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Spindel\Storage">
+      <UniqueIdentifier>{2FE52467-9B46-0275-24B4-482790143934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Spindel\Utils">
+      <UniqueIdentifier>{8B31171E-F747-15B4-40BF-A0D5AC14E63B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ImGuizmo">
+      <UniqueIdentifier>{73BF7F4C-DF4A-ED10-E85B-700554664911}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor\glm">
       <UniqueIdentifier>{829FC5A8-6E57-07F6-D75E-E051C335A2E6}</UniqueIdentifier>
@@ -90,6 +111,18 @@
     <ClInclude Include="src\Spindel.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Assets\Bundle.h">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Assets\Cache.h">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Assets\ImageLoader.h">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Assets\Loader.h">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClInclude>
     <ClInclude Include="src\Spindel\Core\Application.h">
       <Filter>src\Spindel\Core</Filter>
     </ClInclude>
@@ -98,6 +131,12 @@
     </ClInclude>
     <ClInclude Include="src\Spindel\Core\EntryPoint.h">
       <Filter>src\Spindel\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Core\IO\Log.h">
+      <Filter>src\Spindel\Core\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Core\IO\Resource.h">
+      <Filter>src\Spindel\Core\IO</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Core\Input.h">
       <Filter>src\Spindel\Core</Filter>
@@ -109,9 +148,6 @@
       <Filter>src\Spindel\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Core\LayerStack.h">
-      <Filter>src\Spindel\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Spindel\Core\Log.h">
       <Filter>src\Spindel\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Core\MouseButtonCodes.h">
@@ -138,6 +174,9 @@
     <ClInclude Include="src\Spindel\ImGui\ImGuiLayer.h">
       <Filter>src\Spindel\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Math\Math.h">
+      <Filter>src\Spindel\Math</Filter>
+    </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Buffer.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
@@ -153,21 +192,6 @@
     <ClInclude Include="src\Spindel\Renderer\GraphicsContext.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\Mesh.h">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\MeshManager.h">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\Model.h">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\PerspectiveCamera.h">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\PerspectiveFPSCameraController.h">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\RenderCommand.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
@@ -177,11 +201,14 @@
     <ClInclude Include="src\Spindel\Renderer\RendererAPI.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\Shader.h">
-      <Filter>src\Spindel\Renderer</Filter>
+    <ClInclude Include="src\Spindel\Renderer\Resources\Mesh.h">
+      <Filter>src\Spindel\Renderer\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\Texture.h">
-      <Filter>src\Spindel\Renderer</Filter>
+    <ClInclude Include="src\Spindel\Renderer\Resources\Shader.h">
+      <Filter>src\Spindel\Renderer\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\Resources\Texture.h">
+      <Filter>src\Spindel\Renderer\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\VertexArray.h">
       <Filter>src\Spindel\Renderer</Filter>
@@ -192,11 +219,35 @@
     <ClInclude Include="src\Spindel\Scene\Entity.h">
       <Filter>src\Spindel\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Scene\PerspectiveCamera.h">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Scene\PerspectiveFPSCameraController.h">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\Spindel\Scene\Scene.h">
       <Filter>src\Spindel\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Scene\SceneCamera.h">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Scene\ScriptableEntity.h">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Storage\Path.h">
+      <Filter>src\Spindel\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Utils\Json.h">
+      <Filter>src\Spindel\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Utils\Utils.h">
+      <Filter>src\Spindel\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="src\sppch.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\ImGuizmo\ImGuizmo.h">
+      <Filter>vendor\ImGuizmo</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\glm\common.hpp">
       <Filter>vendor\glm\glm</Filter>
@@ -1437,8 +1488,8 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Assets\Asset.h" />
-    <ClInclude Include="src\Spindel\Assets\AssetManager.h" />
+    <ClInclude Include="src\Spindel\Assets\ModelLoader.h" />
+    <ClInclude Include="src\Spindel\Core\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1471,16 +1522,28 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Assets\Bundle.cpp">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Assets\Cache.cpp">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Assets\ImageLoader.cpp">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClCompile>
     <ClCompile Include="src\Spindel\Core\Application.cpp">
       <Filter>src\Spindel\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Core\IO\Log.cpp">
+      <Filter>src\Spindel\Core\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Core\IO\Resource.cpp">
+      <Filter>src\Spindel\Core\IO</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Core\Layer.cpp">
       <Filter>src\Spindel\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Core\LayerStack.cpp">
-      <Filter>src\Spindel\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Core\Log.cpp">
       <Filter>src\Spindel\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\ImGui\ImGuiBuild.cpp">
@@ -1489,6 +1552,9 @@
     <ClCompile Include="src\Spindel\ImGui\ImGuiLayer.cpp">
       <Filter>src\Spindel\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Math\Math.cpp">
+      <Filter>src\Spindel\Math</Filter>
+    </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Buffer.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
@@ -1496,21 +1562,6 @@
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Framebuffer.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\Mesh.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\MeshManager.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\Model.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\PerspectiveCamera.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\PerspectiveFPSCameraController.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\RenderCommand.cpp">
@@ -1522,11 +1573,14 @@
     <ClCompile Include="src\Spindel\Renderer\RendererAPI.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\Shader.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
+    <ClCompile Include="src\Spindel\Renderer\Resources\Mesh.cpp">
+      <Filter>src\Spindel\Renderer\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\Texture.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
+    <ClCompile Include="src\Spindel\Renderer\Resources\Shader.cpp">
+      <Filter>src\Spindel\Renderer\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Renderer\Resources\Texture.cpp">
+      <Filter>src\Spindel\Renderer\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\VertexArray.cpp">
       <Filter>src\Spindel\Renderer</Filter>
@@ -1534,15 +1588,27 @@
     <ClCompile Include="src\Spindel\Scene\Entity.cpp">
       <Filter>src\Spindel\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Scene\PerspectiveCamera.cpp">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Scene\PerspectiveFPSCameraController.cpp">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\Spindel\Scene\Scene.cpp">
+      <Filter>src\Spindel\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Scene\SceneCamera.cpp">
       <Filter>src\Spindel\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\sppch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="vendor\ImGuizmo\ImGuizmo.cpp">
+      <Filter>vendor\ImGuizmo</Filter>
+    </ClCompile>
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Assets\AssetManager.cpp" />
+    <ClCompile Include="src\Spindel\Assets\ModelLoader.cpp" />
   </ItemGroup>
 </Project>

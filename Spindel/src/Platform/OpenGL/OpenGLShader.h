@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Spindel/Renderer/Shader.h"
+#include "Spindel/Renderer/Resources/Shader.h"
 #include <string>
 
 typedef unsigned int GLenum;

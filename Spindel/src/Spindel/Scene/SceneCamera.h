@@ -2,7 +2,7 @@
 
 #include "Spindel/Renderer/Camera.h"
 
-namespace Hazel {
+namespace Spindel {
 
 	class SceneCamera : public Camera
 	{

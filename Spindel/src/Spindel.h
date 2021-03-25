@@ -12,13 +12,13 @@
 #include "Spindel/Renderer/Framebuffer.h"
 #include "Spindel/Renderer/Renderer.h"
 #include "Spindel/Renderer/Buffer.h"
-#include "Spindel/Renderer/Shader.h"
-#include "Spindel/Renderer/Texture.h"
+#include "Spindel/Renderer/Resources/Shader.h"
+#include "Spindel/Renderer/Resources/Texture.h"
 #include "Spindel/Renderer/VertexArray.h"
-#include "Spindel/Renderer/PerspectiveCamera.h"
-#include "Spindel/Renderer/PerspectiveFPSCameraController.h"
+#include "Spindel/Scene/PerspectiveCamera.h"
+#include "Spindel/Scene/PerspectiveFPSCameraController.h"
 
-#include "Spindel/Core/Log.h"
+#include "Spindel/Core/IO/Log.h"
 
 #include "Spindel/Core/Input.h"
 #include "Spindel/Core/KeyCodes.h"
@@ -26,5 +26,6 @@
 
 #include "Spindel/Scene/Scene.h"
 #include "Spindel/Scene/Entity.h"
+#include "Spindel/Scene/ScriptableEntity.h"
 #include "Spindel/Scene/Components.h"
 

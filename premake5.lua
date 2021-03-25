@@ -18,6 +18,7 @@ IncludeDir["glm"] = "Spindel/vendor/glm"
 IncludeDir["stb_image"] = "Spindel/vendor/stb_image"
 IncludeDir["entt"] = "Spindel/vendor/entt/include"
 IncludeDir["assimp"] = "Spindel/vendor/assimp/include"
+IncludeDir["ImGuizmo"] = "Spindel/vendor/ImGuizmo"
 
 group "Dependencies"
 	include "Spindel/vendor/GLFW"
@@ -45,7 +46,10 @@ project "Spindel"
 		"%{prj.name}/vendor/stb_image/**.hpp",
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.h",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.cpp"
+
 	}
 
 	includedirs
@@ -58,7 +62,8 @@ project "Spindel"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.assimp}"
+		"%{IncludeDir.assimp}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	defines
@@ -79,6 +84,9 @@ project "Spindel"
 		"opengl32.lib",
 		"assimp-vc142-mtd.lib"
 	}
+
+	filter "files:Spindel/vendor/ImGuizmo/**.cpp"
+	flags { "NoPCH" }
 
 	filter "system:windows"
 		systemversion "latest"
@@ -128,7 +136,8 @@ project "Sandbox"
 		"Spindel/vendor/spdlog/include",
 		"Spindel/src",
 		"Spindel/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	links
@@ -185,7 +194,9 @@ project "SpindelWeb"
 		"Spindel/vendor",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.assimp}"
+		"%{IncludeDir.assimp}",
+		"%{IncludeDir.ImGuizmo}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links

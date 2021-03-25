@@ -1,22 +1,22 @@
 #include "SceneHierarchyPanel.h"
 
 #include "Spindel.h"
+#include "Spindel/Scene/Components.h"
+#include "Spindel/Assets/Cache.h"
 
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
 
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Spindel/Scene/Components.h"
-#include "Spindel/Renderer/MeshManager.h"
-#include "Spindel/Assets/Asset.h"
 #include <cstring>
 #include <filesystem>
 #include <vector>
 
 namespace Spindel
 {
-	SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& scene)
+	SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& scene, Ref<Cache> cache)
+		: m_Cache(cache)
 	{
 		SetContext(scene);
 	}
@@ -55,7 +55,6 @@ namespace Spindel
 		{
 			if (ImGui::MenuItem("Create Empty Entity"))
 				m_Context->CreateEntity("Empty Entity");
-
 			ImGui::EndPopup();
 		}
 
@@ -69,117 +68,11 @@ namespace Spindel
 
 		ImGui::End();
 
-
-		ImGui::Begin("Content Browser");
-		DrawContentBrowser();
-
-		ImGui::End();
 	}
 
 	void SceneHierarchyPanel::DrawContentBrowser()
 	{
-		float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-		ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
-
-
-		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.15f, 0.1f, 0.6f, 1.0f });
-		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.2f, 0.2f, 0.9f, 1.0f });
-		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.15f, 0.1f, 0.8f, 1.0f });
-		if (ImGui::Button("+", buttonSize))
-		{
-
-		}
-			
-		ImGui::PopStyleColor(3);
-
-		ImGui::Separator();
-
-		ImGui::Columns(2);
-		ImGui::SetColumnWidth(0, 200);
-		/*
-		std::map<std::filesystem::path, std::filesystem::path> assets;
-		static int selection_mask = (1 << 2);
-		int node_clicked = -1;
-		static std::filesystem::path currentfolder;
-		ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
-		std::function<void(const std::filesystem::path&, unsigned int, unsigned int&)> functor = [&](
-			const std::filesystem::path& path,
-			unsigned int depth, unsigned int& idx) {
-				for (auto&& p : std::filesystem::directory_iterator(path)) {
-					ImGuiTreeNodeFlags node_flags =
-						ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick |
-						((selection_mask & (1 << idx)) ? ImGuiTreeNodeFlags_Selected : 0);
-					if (std::filesystem::is_directory(p.path())) {
-						using namespace std::string_literals;
-						std::string s = p.path().filename().string();
-						if (ImGui::TreeNodeEx((void*)(intptr_t)idx, node_flags, "%s", s.c_str())) {
-							if (ImGui::IsItemClicked())
-							{
-								node_clicked = idx;
-								currentfolder = p.path();
-							}
-							functor(p, depth + 1, ++idx);
-							ImGui::TreePop();
-						}
-					}
-					else {
-						SP_WARN("{0}", p.path().parent_path().string());
-						assets.insert({ currentfolder, p.path() });
-					}
-					++idx;
-				}
-				depth -= 1;
-		};
-		unsigned int dir_idx = 0u;
-		functor(std::filesystem::current_path(), 0u, dir_idx);
-		if (node_clicked != -1) {
-			selection_mask = (1 << node_clicked); 
-		}
-		ImGui::PopStyleVar();
-		ImGui::NextColumn();
-		ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-		unsigned int idx = 0u;
-		for (std::map<std::filesystem::path, std::filesystem::path>::iterator iter = assets.begin(); iter != assets.end(); ++iter)
-		{
-			std::filesystem::path k = iter->first;
-			std::filesystem::path p = iter->second;
-			if (k.filename() == currentfolder.filename())
-			{
-				ImGui::TreeNodeEx((void*)(intptr_t)idx, node_flags, "%s",
-					p.filename().string().c_str());
-			}
-		}*/
 		
-		static std::string currentfolder;
-		static int selection_mask = (1 << 2);
-		int node_clicked = -1;
-		unsigned int idx = 0u;
-
-		for (auto& asset : m_AssetManager.GetAssets())
-		{
-			ImGuiTreeNodeFlags node_flags =
-				ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick |
-				((selection_mask & (1 << idx)) ? ImGuiTreeNodeFlags_Selected : 0);
-				if (ImGui::TreeNodeEx((void*)(intptr_t)idx, node_flags, "%s", asset->GetDirectory().c_str())) {
-					if (ImGui::IsItemClicked())
-					{
-						node_clicked = idx;
-						currentfolder = asset->GetDirectory();
-					}
-					ImGui::TreePop();
-				}
-			if (asset->GetDirectory() == currentfolder)
-			{
-				ImGui::NextColumn();
-				ImGui::TreeNodeEx((void*)(intptr_t)idx, node_flags, "%s",
-					asset->GetName());
-				ImGui::NextColumn();
-			}
-		}
-
-		if (node_clicked != -1) {
-			selection_mask = (1 << node_clicked);
-		}
 		
 	}
 
@@ -371,10 +264,19 @@ namespace Spindel
 
 		if (ImGui::BeginPopup("AddComponent"))
 		{
-			if (ImGui::MenuItem("Mesh"))
+			if (ImGui::MenuItem("Camera"))
 			{
-				if (!m_SelectionContext.HasComponent<MeshComponent>())
-					m_SelectionContext.AddComponent<MeshComponent>();
+				if (!m_SelectionContext.HasComponent<CameraComponent>())
+					m_SelectionContext.AddComponent<CameraComponent>();
+				else
+					SP_CORE_WARN("This entity already has the Camera Component!");
+				ImGui::CloseCurrentPopup();
+			}
+
+			if (ImGui::MenuItem("StaticMeshRenderer"))
+			{
+				if (!m_SelectionContext.HasComponent<StaticMeshRendererComponent>())
+					m_SelectionContext.AddComponent<StaticMeshRendererComponent>(m_Cache->getMesh("Cube"));
 				else
 					SP_CORE_WARN("This entity already has the Mesh Component!");
 				ImGui::CloseCurrentPopup();
@@ -382,12 +284,11 @@ namespace Spindel
 			ImGui::EndPopup();
 		}
 
-		DrawComponent<MeshComponent>("Mesh", entity, [](auto& component)
+		DrawComponent<StaticMeshRendererComponent>("Mesh Renderer", entity, [](auto& component)
 			{
-				ImGui::Checkbox("Visible", &component.visible);
-				
-				{
-					std::vector<Ref<Model>> m = MeshManager::GetAllModels();
+
+				/*{
+					std::vector<Ref<Mesh>> m = MeshManager::GetAllModels();
 						
 					std::vector<std::string> names;
 					for (auto& a : m)
@@ -401,7 +302,67 @@ namespace Spindel
 						component.model = m[component.index];
 						component.prev_index = component.index;
 					}
+				}*/
+			});
+
+		DrawComponent<CameraComponent>("Camera", entity, [](auto& component)
+			{
+				auto& camera = component.Camera;
+
+				ImGui::Checkbox("Primary", &component.Primary);
+
+				const char* projectionTypeStrings[] = { "Perspective", "Orthographic" };
+				const char* currentProjectionTypeString = projectionTypeStrings[(int)camera.GetProjectionType()];
+				if (ImGui::BeginCombo("Projection", currentProjectionTypeString))
+				{
+					for (int i = 0; i < 2; i++)
+					{
+						bool isSelected = currentProjectionTypeString == projectionTypeStrings[i];
+						if (ImGui::Selectable(projectionTypeStrings[i], isSelected))
+						{
+							currentProjectionTypeString = projectionTypeStrings[i];
+							camera.SetProjectionType((SceneCamera::ProjectionType)i);
+						}
+
+						if (isSelected)
+							ImGui::SetItemDefaultFocus();
+					}
+
+					ImGui::EndCombo();
+				}
+
+				if (camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
+				{
+					float perspectiveVerticalFov = glm::degrees(camera.GetPerspectiveVerticalFOV());
+					if (ImGui::DragFloat("Vertical FOV", &perspectiveVerticalFov))
+						camera.SetPerspectiveVerticalFOV(glm::radians(perspectiveVerticalFov));
+
+					float perspectiveNear = camera.GetPerspectiveNearClip();
+					if (ImGui::DragFloat("Near", &perspectiveNear))
+						camera.SetPerspectiveNearClip(perspectiveNear);
+
+					float perspectiveFar = camera.GetPerspectiveFarClip();
+					if (ImGui::DragFloat("Far", &perspectiveFar))
+						camera.SetPerspectiveFarClip(perspectiveFar);
+				}
+
+				if (camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
+				{
+					float orthoSize = camera.GetOrthographicSize();
+					if (ImGui::DragFloat("Size", &orthoSize))
+						camera.SetOrthographicSize(orthoSize);
+
+					float orthoNear = camera.GetOrthographicNearClip();
+					if (ImGui::DragFloat("Near", &orthoNear))
+						camera.SetOrthographicNearClip(orthoNear);
+
+					float orthoFar = camera.GetOrthographicFarClip();
+					if (ImGui::DragFloat("Far", &orthoFar))
+						camera.SetOrthographicFarClip(orthoFar);
+
+					ImGui::Checkbox("Fixed Aspect Ratio", &component.FixedAspectRatio);
 				}
 			});
+
 	}
 }

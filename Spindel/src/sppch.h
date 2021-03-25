@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Spindel/Core/Log.h"
+#include "Spindel/Core/IO/Log.h"
 
 #include <iostream>
 #include <memory>

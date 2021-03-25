@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include "glad/glad.h"
-#include "..\..\Spindel\Renderer\Shader.h"
+#include "Spindel/Renderer/Resources/Shader.h"
 
 #include "glm/gtc/type_ptr.hpp"
 namespace Spindel {
@@ -28,6 +28,7 @@ namespace Spindel {
 	OpenGLShader::OpenGLShader(const std::string& path)
 		: m_Name("Shader")
 	{
+		Resource::SetPath(path);
 		std::string source = ReadFile(path);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);

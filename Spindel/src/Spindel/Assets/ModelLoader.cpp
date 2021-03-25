@@ -1,44 +1,39 @@
 #include "sppch.h"
-#include "Spindel/Renderer/Model.h"
-#include "Spindel/Renderer/MeshManager.h"
-
-#include "Spindel/Renderer/VertexArray.h"
+#include "ModelLoader.h"
 
 namespace Spindel
 {
-    Model::Model(std::string const& path)
-    {
-        LoadModel(path);
-    }
-
-    void Model::Draw(const glm::mat4& transform)
-    {
-        for (auto& a : m_Meshes)
-        {
-            a->Draw(transform);
-        }
-    }
-
-    void Model::LoadModel(const std::string& path)
-    {
+	ModelLoader::ModelLoader(Cache& cache)
+		: Loader{cache, Type::staticMesh}
+	{
+	}
+	bool ModelLoader::loadAsset(Bundle& bundle, const std::string& name, const std::string& filename, bool mipmaps)
+	{
+        m_Bundle = &bundle;
         // read file via ASSIMP
         Assimp::Importer importer;
-        const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+        const aiScene* scene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
         // check for errors
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
         {
             SP_WARN("ERROR::ASSIMP:: {0}", importer.GetErrorString());
-            return;
+            return false;
         }
         // retrieve the directory path of the filepath
-        m_Directory = path.substr(0, path.find_last_of('/')) + "/";
-        m_Name = path.substr(path.find_last_of('/')+1, path.find_last_of('.'));
+        m_Directory = filename.substr(0, filename.find_last_of('/')) + "/";
+        //m_Name = filename.substr(filename.find_last_of('/') + 1, filename.find_last_of('.'));
 
         // process ASSIMP's root node recursively
         ProcessNode(scene->mRootNode, scene);
+		return true;
+	}
+
+    void ModelLoader::LoadModel(const std::string& path)
+    {
+
     }
 
-    void Model::ProcessNode(aiNode* node, const aiScene* scene)
+    void ModelLoader::ProcessNode(aiNode* node, const aiScene* scene)
     {
         // process each mesh located at the current node
         for (unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -46,7 +41,7 @@ namespace Spindel
             // the node object only contains indices to index the actual objects in the scene. 
             // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-            m_Meshes.push_back(ProcessMesh(mesh, scene));
+            m_Bundle->setMesh(std::string(mesh->mName.C_Str()), ProcessMesh(mesh, scene));
         }
         // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
         for (unsigned int i = 0; i < node->mNumChildren; i++)
@@ -55,7 +50,7 @@ namespace Spindel
         }
     }
 
-    Ref<Mesh> Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+    Ref<Mesh> ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     {
         // data to fill
         std::vector<Vertex> vertices;
@@ -152,13 +147,13 @@ namespace Spindel
         Ref<IndexBuffer> ib = IndexBuffer::Create(indices);
         va->AddIndexBuffer(ib);
 
-        Ref<Mesh> m = MeshManager::CreateMesh(m_Directory, va, vb, ib, textures);
+        Ref<Mesh> m = Mesh::Create(va, vb, ib, textures);
         return m;
     }
 
     // checks all material textures of a given type and loads the textures if they're not loaded yet.
      // the required info is returned as a Texture struct.
-    std::vector<Ref<Texture2D>> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName)
+    std::vector<Ref<Texture2D>> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName)
     {
         std::vector<Ref<Texture2D>> textures;
         for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -166,29 +161,26 @@ namespace Spindel
             aiString str;
             mat->GetTexture(type, i, &str);
             bool skip = false;
-            for (unsigned int j = 0; j < m_TexturesLoaded.size(); j++)
+
+            std::string s = std::string(str.C_Str());
+            s = s.substr(s.find_last_of('/') + 1, s.back());
+            Ref<Texture2D> temp = m_Bundle->getTexture(s.c_str());
+            if (temp != nullptr)
             {
-                std::string s = std::string(str.C_Str());
-                SP_WARN(s);
-                s = s.substr(s.find_last_of('/') + 1, s.back());
-                if (std::strcmp(m_TexturesLoaded[j]->GetName().c_str(), s.c_str()) == 0)
-                {
-                    textures.push_back(m_TexturesLoaded[j]);
-                    skip = true;
-                    break;
-                }
+                textures.push_back(temp);
+                skip = true;
+                break;
             }
+          
             // if texture hasn't been loaded already, load it
             if (!skip)
             {
                 std::string filepath = m_Directory.c_str() + std::string(str.C_Str());
                 Ref<Texture2D> texture = Texture2D::Create(filepath, typeName);
                 textures.push_back(texture);
-                m_TexturesLoaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
+                m_Bundle->loadAsset(Type::image, s, filepath);
             }
         }
         return textures;
     };
-
-
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Spindel/Renderer/Texture.h"
+#include "Spindel/Renderer/Resources/Texture.h"
 
 #include <glad/glad.h>
 
@@ -10,6 +10,7 @@ namespace Spindel {
 	{
 	public:
 		OpenGLTexture2D(const std::string& path, const std::string& name);
+		OpenGLTexture2D(stbi_uc* data, uint32_t width, uint32_t height, uint32_t channels);
 		virtual ~OpenGLTexture2D();
 
 		virtual uint32_t GetWidth() const override { return m_Width; }
@@ -20,7 +21,6 @@ namespace Spindel {
 		virtual void Bind(uint32_t slot = 0) const override;
 
 	private:
-		std::string m_Path;
 		std::string m_Name;
 
 		uint32_t m_Width;

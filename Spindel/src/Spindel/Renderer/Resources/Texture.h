@@ -3,10 +3,14 @@
 #include <string>
 
 #include "Spindel/Core/Core.h"
+#include "Spindel/Core/IO/Resource.h"
+
+
+#include <stb_image.h>
 
 namespace Spindel {
 
-	class Texture
+	class Texture : public Resource
 	{
 	public:
 		virtual ~Texture() = default;
@@ -23,6 +27,7 @@ namespace Spindel {
 	{
 	public:
 		static Ref<Texture2D> Create(const std::string& path, const std::string& name = "Default");
+		static Ref<Texture2D> Create(stbi_uc* data, uint32_t width, uint32_t height, uint32_t channels);
 	};
 
 }

@@ -1,15 +1,33 @@
 #include "EditorLayer.h"
 
+
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include <imgui/imgui.h>
+#include <imgui/imgui_internal.h>
+
+#include "ImGuizmo.h"
+
+#include "Spindel/Math/Math.h"
+
+#include "Spindel/Assets/Cache.h"
+
 namespace Spindel {
 
 
 	EditorLayer::EditorLayer()
-		: Layer("SpindelWeb"), m_Camera(45.f, 1280.f, 720.f, 0.1f, 1000.f)
+		: Layer("SpindelWeb")
 	{
 	}
 
 	void EditorLayer::OnAttach()
 	{
+		m_Cache = CreateRef<Cache>();
+		m_Bundle = CreateRef<Bundle>(m_Cache);
+		m_Bundle->loadAsset(Loader::Type::image, "bomb", "assets/textures/bomb.png");
+		m_Bundle->loadAsset(Loader::Type::staticMesh, "asd", "assets/models/test/test.fbx");
+
 		FramebufferSpecification fbSpec;
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
@@ -18,12 +36,23 @@ namespace Spindel {
 		m_ActiveScene = CreateRef<Scene>();
 		m_EditorCamera = EditorCamera(30.f, 1.778f, 0.1f, 1000.0f);
 
-		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
+		m_CameraEntity.AddComponent<CameraComponent>();
+		m_SecondCamera = m_ActiveScene->CreateEntity("Camera B");
+		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
+		cc.Primary = false;
+
+		m_SceneHierarchyPanel = SceneHierarchyPanel(m_ActiveScene, m_Cache);
+
+	}
+
+	void EditorLayer::OnDetach()
+	{
+
 	}
 
 	void EditorLayer::OnUpdate()
 	{
-		m_Camera.OnUpdate();
 
 		// Resize
 		if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
@@ -31,9 +60,8 @@ namespace Spindel {
 			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
 		{
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_Camera.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
 		}
-		
 		m_EditorCamera.OnUpdate();
 	}
 
@@ -213,6 +241,88 @@ namespace Spindel {
 		
 		uint64_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
+		float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+		ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.15f, 0.4f, 0.7f, 0.75f });
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.2f, 0.4f, 0.9f, 1.0f });
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.4f, 0.4f, 0.8f, 1.0f });
+		ImGui::SetCursorPos(ImVec2(10,30));
+		if (ImGui::Button("q", buttonSize))
+		{
+			m_GizmoType = -1;
+		}
+		ImGui::SetCursorPos(ImVec2(10, 60));
+		if (ImGui::Button("w", buttonSize))
+		{
+			m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+		}
+		ImGui::SetCursorPos(ImVec2(10, 90));
+		if (ImGui::Button("e", buttonSize))
+		{
+			m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+		}
+		ImGui::SetCursorPos(ImVec2(10, 120));
+		if (ImGui::Button("r", buttonSize))
+		{
+			m_GizmoType = ImGuizmo::OPERATION::SCALE;
+		}
+
+		
+		ImGui::PopStyleColor(3);
+
+		// Gizmos
+		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
+		if (selectedEntity && m_GizmoType != -1)
+		{
+			ImGuizmo::SetOrthographic(false);
+			ImGuizmo::SetDrawlist();
+
+			float windowWidth = (float)ImGui::GetWindowWidth();
+			float windowHeight = (float)ImGui::GetWindowHeight();
+			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+			// Camera
+
+			// Runtime camera from entity
+			// auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+			// const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+			// const glm::mat4& cameraProjection = camera.GetProjection();
+			// glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+
+			// Editor camera
+			const glm::mat4& cameraProjection = m_EditorCamera.GetProjection();
+			glm::mat4 cameraView = m_EditorCamera.GetViewMatrix();
+
+			// Entity transform
+			auto& tc = selectedEntity.GetComponent<TransformComponent>();
+			glm::mat4 transform = tc.GetTransform();
+
+			// Snapping
+			bool snap = Input::IsKeyPressed(SP_KEY_LEFT_CONTROL);
+			float snapValue = 0.5f; // Snap to 0.5m for translation/scale
+			// Snap to 45 degrees for rotation
+			if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
+				snapValue = 45.0f;
+
+			float snapValues[3] = { snapValue, snapValue, snapValue };
+
+			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+				(ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform),
+				nullptr, snap ? snapValues : nullptr);
+
+			if (ImGuizmo::IsUsing())
+			{
+				glm::vec3 translation, rotation, scale;
+				Math::DecomposeTransform(transform, translation, rotation, scale);
+
+				glm::vec3 deltaRotation = rotation - tc.Rotation;
+				tc.Translation = translation;
+				tc.Rotation += deltaRotation;
+				tc.Scale = scale;
+			}
+		}
+
 		
 		ImGui::End();
 		ImGui::PopStyleVar();
@@ -228,7 +338,50 @@ namespace Spindel {
 
 	void EditorLayer::OnEvent(Spindel::Event& event)
 	{
-		m_Camera.OnEvent(event);
+		m_EditorCamera.OnEvent(event);
+
+		EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<KeyPressedEvent>(SP_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 	}
 
+	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
+	{
+		// Shortcuts
+		if (e.GetRepeatCount() > 0)
+			return false;
+
+		bool control = Input::IsKeyPressed(SP_KEY_LEFT_CONTROL) || Input::IsKeyPressed(SP_KEY_RIGHT_CONTROL);
+		bool shift = Input::IsKeyPressed(SP_KEY_LEFT_SHIFT) || Input::IsKeyPressed(SP_KEY_RIGHT_SHIFT);
+
+		switch (e.GetKeyCode())
+		{
+		
+
+		// Gizmos
+		case SP_KEY_Q:
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = -1;
+			break;
+		}
+		case SP_KEY_W:
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+			break;
+		}
+		case SP_KEY_E:
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+			break;
+		}
+		case SP_KEY_R:
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = ImGuizmo::OPERATION::SCALE;
+			break;
+		}
+		}
+	}
 }

@@ -2,10 +2,13 @@
 #include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "Spindel/Renderer/Mesh.h"
-#include "Spindel/Renderer/MeshManager.h"
+#include "Spindel/Renderer/Resources/Mesh.h"
+
+#include "ScriptableEntity.h"
+#include "SceneCamera.h"
 
 namespace Spindel {
 
@@ -40,23 +43,42 @@ namespace Spindel {
 		}
 	};
 
-	struct MeshComponent
+	struct StaticMeshRendererComponent
 	{
-		Ref<Model> model;
-		bool visible = true;
-		bool isModel = false;
+		StaticMeshRendererComponent() = default;
+		StaticMeshRendererComponent(Ref<Mesh> mesh)
+			: m_Mesh(mesh) {}
 
-		int index = 0;
-		int prev_index = 0;
-		MeshComponent(const MeshComponent&) = default;
-		MeshComponent()
+		void Draw(const glm::mat4& transform)
 		{
-			Ref<Model> m = MeshManager::GetModel("box.fbx");
-			if (m == nullptr)
-				model = MeshManager::CreateModel("assets/models/box/box.fbx");
-			else
-				model = m;
-				
+			m_Mesh->Draw(transform);
+		}
+	private:
+		Ref<Mesh> m_Mesh;
+	};
+
+	struct CameraComponent
+	{
+		SceneCamera Camera;
+		bool Primary = true; // TODO: think about moving to Scene
+		bool FixedAspectRatio = false;
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+	};
+
+	struct NativeScriptComponent
+	{
+		ScriptableEntity* Instance = nullptr;
+
+		ScriptableEntity* (*InstantiateScript)();
+		void (*DestroyScript)(NativeScriptComponent*);
+
+		template<typename T>
+		void Bind()
+		{
+			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
+			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
 		}
 	};
 }

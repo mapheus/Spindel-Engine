@@ -1,6 +1,6 @@
 #include "sppch.h"
 #include "Renderer.h"
-#include "Spindel/Renderer/Texture.h"
+#include "Spindel/Renderer/Resources/Texture.h"
 
 namespace Spindel {
 
@@ -49,11 +49,11 @@ namespace Spindel {
 		s_Data.TextureShader->SetInt("u_Texture", 0);
 	}
 
-	void Renderer::BeginScene(PerspectiveCamera& camera)
+	void Renderer::BeginScene(const Camera& camera, const glm::mat4& transform)
 	{
 		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-		s_Data.ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetProjection() * glm::inverse(transform));
+		s_Data.ViewProjectionMatrix = camera.GetProjection();
 	}
 
 	void Renderer::BeginScene(const EditorCamera& camera)
@@ -84,9 +84,9 @@ namespace Spindel {
 		RenderCommand::DrawIndexed(vertexArray);
 	}
 
-	void Renderer::DrawMesh(const Ref<Model>& model, const glm::mat4& transform)
+	void Renderer::DrawMesh(const Ref<Mesh>& mesh, const glm::mat4& transform)
 	{
-		model->Draw(transform);
+		mesh->Draw(transform);
 	}
 
 }

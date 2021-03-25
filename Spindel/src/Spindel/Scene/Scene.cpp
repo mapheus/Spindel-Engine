@@ -3,6 +3,8 @@
 
 #include "Components.h"
 
+#include <glm/glm.hpp>
+
 #include "Entity.h"
 #include "Spindel/Renderer/Renderer.h"
 
@@ -33,35 +35,63 @@ namespace Spindel
 
 	void Scene::OnUpdateRuntime()
 	{
-		//Renderer::BeginScene(*mainCamera, cameraTransform);
-
-		auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
-		for (auto entity : group)
 		{
-			auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
-
-			if (mesh.visible)
+			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 			{
-				//Renderer::DrawMesh(mesh.GetMesh(), transform.GetTransform());
+				if (!nsc.Instance)
+				{
+					nsc.Instance = nsc.InstantiateScript();
+					nsc.Instance->m_Entity = Entity{ entity, this };
+					nsc.Instance->OnCreate();
+				}
+				nsc.Instance->OnUpdate();
+			});
+		}
+
+		Camera* mainCamera = nullptr;
+		glm::mat4 cameraTransform;
+		{
+			auto view = m_Registry.view<TransformComponent, CameraComponent>();
+			for (auto entity : view)
+			{
+				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+
+				if (camera.Primary)
+				{
+					mainCamera = &camera.Camera;
+					cameraTransform = transform.GetTransform();
+					break;
+				}
 			}
 		}
 
-		//Renderer::EndScene();
+		if (mainCamera)
+		{
+			Renderer::BeginScene(*mainCamera, cameraTransform);
+
+			auto group = m_Registry.group<TransformComponent>(entt::get<StaticMeshRendererComponent>);
+			for (auto entity : group)
+			{
+				auto [transform, mesh] = group.get<TransformComponent, StaticMeshRendererComponent>(entity);
+
+				mesh.Draw(transform.GetTransform());
+			}
+
+			Renderer::EndScene();
+		}
 	}
 
 	void Scene::OnUpdateEditor(EditorCamera& camera)
 	{
+
 		Renderer::BeginScene(camera);
 
-		auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
+		auto group = m_Registry.group<TransformComponent>(entt::get<StaticMeshRendererComponent>);
 		for (auto entity : group)
 		{
-			auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
+			auto [transform, mesh] = group.get<TransformComponent, StaticMeshRendererComponent>(entity);
 
-			if (mesh.visible)
-			{
-				Renderer::DrawMesh(mesh.model, transform.GetTransform());
-			}
+			mesh.Draw(transform.GetTransform());
 		}
 
 		Renderer::EndScene();
@@ -69,6 +99,29 @@ namespace Spindel
 
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
 	{
+		m_ViewportWidth = width;
+		m_ViewportHeight = height;
+
+		// Resize our non-FixedAspectRatio cameras
+		auto view = m_Registry.view<CameraComponent>();
+		for (auto entity : view)
+		{
+			auto& cameraComponent = view.get<CameraComponent>(entity);
+			if (!cameraComponent.FixedAspectRatio)
+				cameraComponent.Camera.SetViewportSize(width, height);
+		}
+	}
+
+	Entity Scene::GetPrimaryCameraEntity()
+	{
+		auto view = m_Registry.view<CameraComponent>();
+		for (auto entity : view)
+		{
+			const auto& camera = view.get<CameraComponent>(entity);
+			if (camera.Primary)
+				return Entity{ entity, this };
+		}
+		return {};
 	}
 
 	template<typename T>
@@ -83,8 +136,19 @@ namespace Spindel
 	}
 
 	template<>
-	void Scene::OnComponentAdded<MeshComponent>(Entity entity, MeshComponent& component)
+	void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<StaticMeshRendererComponent>(Entity entity, StaticMeshRendererComponent& component)
 	{
 
+	}
+
+	template<>
+	void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
+	{
+		component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 	}
 }

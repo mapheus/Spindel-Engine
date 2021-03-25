@@ -4,8 +4,7 @@
 #include "Spindel/Scene/Scene.h"
 #include "Spindel/Scene/Entity.h"
 
-
-#include "Spindel/Assets/AssetManager.h"
+#include "Spindel/Assets/Cache.h"
 
 namespace Spindel
 {
@@ -13,7 +12,7 @@ namespace Spindel
 	{
 	public:
 		SceneHierarchyPanel() = default;
-		SceneHierarchyPanel(const Ref<Scene>& scene);
+		SceneHierarchyPanel(const Ref<Scene>& scene, Ref<Cache> cache);
 
 		void SetContext(const Ref<Scene>& scene);
 
@@ -27,7 +26,6 @@ namespace Spindel
 	private:
 		Ref<Scene> m_Context;
 		Entity m_SelectionContext;
-
-		AssetManager m_AssetManager;
+		Ref<Cache> m_Cache;
 	};
 }
