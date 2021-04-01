@@ -15,7 +15,8 @@ namespace Spindel
         enum class Type
         {
             staticMesh,
-            image
+            image,
+            shader
         };
 
         Loader(Cache& initCache, Type initType) :

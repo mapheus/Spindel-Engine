@@ -176,9 +176,9 @@ namespace Spindel
             if (!skip)
             {
                 std::string filepath = m_Directory.c_str() + std::string(str.C_Str());
-                Ref<Texture2D> texture = Texture2D::Create(filepath, typeName);
-                textures.push_back(texture);
                 m_Bundle->loadAsset(Type::image, s, filepath);
+                Ref<Texture2D> texture = m_Bundle->getTexture(s.c_str());
+                textures.push_back(texture);
             }
         }
         return textures;

@@ -13,6 +13,9 @@
 #include <filesystem>
 #include <vector>
 
+#include "Spindel/Renderer/Material.h"
+#include "Spindel/Renderer/Resources/Shader.h"
+#include "Spindel/Core/Core.h"
 namespace Spindel
 {
 	SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& scene, Ref<Cache> cache)
@@ -275,8 +278,10 @@ namespace Spindel
 
 			if (ImGui::MenuItem("StaticMeshRenderer"))
 			{
+				Ref<Material> m = CreateRef<Material>();
+				m->SetShader(Shader::Create("assets/shaders/Spindel_Core_PBR.glsl"));
 				if (!m_SelectionContext.HasComponent<StaticMeshRendererComponent>())
-					m_SelectionContext.AddComponent<StaticMeshRendererComponent>(m_Cache->getMesh("Cube"));
+					m_SelectionContext.AddComponent<StaticMeshRendererComponent>(m_Cache->getMesh("Cube"), m);
 				else
 					SP_CORE_WARN("This entity already has the Mesh Component!");
 				ImGui::CloseCurrentPopup();
@@ -286,7 +291,21 @@ namespace Spindel
 
 		DrawComponent<StaticMeshRendererComponent>("Mesh Renderer", entity, [](auto& component)
 			{
+				ImGui::Separator();
+				if(ImGui::ColorPicker4("Color:", (float*)&component.temp_color))
+				{
+					component.m_Material->SetColor(component.temp_color);
+				}
 
+				if (ImGui::SliderFloat("Metallic: ", (float*)&component.temp_metallic, 0, 30))
+				{
+					component.m_Material->SetMetallic(component.temp_metallic);
+				}
+
+				if (ImGui::SliderFloat("Roughness: ", (float*)&component.temp_roughness, 0, 50))
+				{
+					component.m_Material->SetRoughness(component.temp_roughness);
+				}
 				/*{
 					std::vector<Ref<Mesh>> m = MeshManager::GetAllModels();
 						

@@ -6,7 +6,7 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace Spindel {
-	class SPINDEL_API Log
+	class Log
 	{
 	public:
 		static void Init();
@@ -31,5 +31,5 @@ namespace Spindel {
 #define SP_TRACE(...) ::Spindel::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define SP_INFO(...) ::Spindel::Log::GetClientLogger()->info(__VA_ARGS__)
 #define SP_WARN(...) ::Spindel::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define SP_ERR(...) ::Spindel::Log::GetClientLogger()->error(__VA_ARGS__)
+#define SP_ERROR(...) ::Spindel::Log::GetClientLogger()->error(__VA_ARGS__)
 #define SP_FATAL(...) ::Spindel::Log::GetClientLogger()->fatal(__VA_ARGS__)

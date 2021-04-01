@@ -123,7 +123,19 @@
     <ClInclude Include="src\Spindel\Assets\Loader.h">
       <Filter>src\Spindel\Assets</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Assets\ModelLoader.h">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Assets\ShaderLoader.h">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClInclude>
     <ClInclude Include="src\Spindel\Core\Application.h">
+      <Filter>src\Spindel\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Core\Assert.h">
+      <Filter>src\Spindel\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Core\Buffer.h">
       <Filter>src\Spindel\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Core\Core.h">
@@ -153,7 +165,16 @@
     <ClInclude Include="src\Spindel\Core\MouseButtonCodes.h">
       <Filter>src\Spindel\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Core\Ref.h">
+      <Filter>src\Spindel\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Core\Singleton.h">
+      <Filter>src\Spindel\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Spindel\Core\Timestep.h">
+      <Filter>src\Spindel\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Core\UUID.h">
       <Filter>src\Spindel\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Core\Window.h">
@@ -192,6 +213,9 @@
     <ClInclude Include="src\Spindel\Renderer\GraphicsContext.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\Material.h">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\RenderCommand.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
@@ -209,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Resources\Texture.h">
       <Filter>src\Spindel\Renderer\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spindel\Renderer\ShaderUniform.h">
+      <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\VertexArray.h">
       <Filter>src\Spindel\Renderer</Filter>
@@ -1488,8 +1515,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Assets\ModelLoader.h" />
-    <ClInclude Include="src\Spindel\Core\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1531,6 +1556,12 @@
     <ClCompile Include="src\Spindel\Assets\ImageLoader.cpp">
       <Filter>src\Spindel\Assets</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Assets\ModelLoader.cpp">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Assets\ShaderLoader.cpp">
+      <Filter>src\Spindel\Assets</Filter>
+    </ClCompile>
     <ClCompile Include="src\Spindel\Core\Application.cpp">
       <Filter>src\Spindel\Core</Filter>
     </ClCompile>
@@ -1544,6 +1575,9 @@
       <Filter>src\Spindel\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Core\LayerStack.cpp">
+      <Filter>src\Spindel\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spindel\Core\UUID.cpp">
       <Filter>src\Spindel\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\ImGui\ImGuiBuild.cpp">
@@ -1564,13 +1598,13 @@
     <ClCompile Include="src\Spindel\Renderer\Framebuffer.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spindel\Renderer\Material.cpp">
+      <Filter>src\Spindel\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\RenderCommand.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Renderer.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\RendererAPI.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Resources\Mesh.cpp">
@@ -1609,6 +1643,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Assets\ModelLoader.cpp" />
   </ItemGroup>
 </Project>

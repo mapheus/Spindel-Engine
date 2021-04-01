@@ -11,12 +11,14 @@
 
 namespace Spindel {
 
+	class Material;
+
 	class Mesh : public Resource
 	{
 	public:
 		virtual ~Mesh() = default;
 
-		virtual void Draw(const glm::mat4& transform) = 0;
+		virtual void Draw(Ref<Material>& material, const glm::mat4& transform) = 0;
 
 		//virtual std::vector<Ref<Mesh>> GetChildren() = 0;
 

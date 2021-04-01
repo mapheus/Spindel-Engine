@@ -20,7 +20,7 @@ namespace Spindel
 		OpenGLMesh(Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures);
 		virtual ~OpenGLMesh();
 
-		void Draw(const glm::mat4& transform) override;
+		void Draw(Ref<Material>& material, const glm::mat4& transform) override;
 
 	private:
 		bool m_Root = false;

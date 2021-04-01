@@ -20,7 +20,7 @@ namespace Spindel
 		//Resource::SetPath(path.c_str());
 
 		data = stbi_load(filename.c_str(), &width, &height, &channels, 0);
-		SP_CORE_ASSERT(data, "Failed to load image! Path: {0}", filename.c_str());
+		SP_CORE_ASSERT(data, "Failed to load image! Path: %s", filename.c_str());
 
 		Ref<Texture2D> t = Texture2D::Create(data, width, height, channels);
 		bundle.setTexture(name, t);

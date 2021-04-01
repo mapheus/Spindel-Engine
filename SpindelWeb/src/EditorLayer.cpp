@@ -19,6 +19,26 @@ namespace Spindel {
 	EditorLayer::EditorLayer()
 		: Layer("SpindelWeb")
 	{
+		float vertices[6* 3] =
+		{
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f
+		};
+
+
+		m_Vao = VertexArray::Create();
+
+		m_Vbo = VertexBuffer::Create(vertices, sizeof(vertices));
+
+		BufferLayout layout = {
+			{ ShaderDataType::Float3, "a_Position" }
+		};
+		m_Vbo->SetLayout(layout);
+		m_Vao->AddVertexBuffers(m_Vbo);
 	}
 
 	void EditorLayer::OnAttach()
@@ -34,7 +54,7 @@ namespace Spindel {
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
 		m_ActiveScene = CreateRef<Scene>();
-		m_EditorCamera = EditorCamera(30.f, 1.778f, 0.1f, 1000.0f);
+		m_EditorCamera = EditorCamera(30.f, 1.778f, 0.01f, 1000.0f);
 
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
 		m_CameraEntity.AddComponent<CameraComponent>();
@@ -68,10 +88,10 @@ namespace Spindel {
 	void EditorLayer::OnRender()
 	{
 		m_Framebuffer->Bind();
-		Spindel::RenderCommand::SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
+		Spindel::RenderCommand::SetClearColor(glm::vec4(0.9f, 0.3f, 0.27f, 1.0f));
 		Spindel::RenderCommand::Clear();
-
 		m_ActiveScene->OnUpdateEditor(m_EditorCamera);
+		Renderer::DrawGrid(m_Vao);
 
 		m_Framebuffer->Unbind();
 	}

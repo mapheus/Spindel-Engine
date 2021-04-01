@@ -140,4 +140,19 @@ namespace Spindel {
 		static Ref<IndexBuffer> Create(std::vector<uint32_t> indices);
 		
 	};
+
+	class UniformBuffer
+	{
+	public:
+		virtual ~UniformBuffer() {}
+
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
+
+		virtual uint32_t GetCount() const = 0;
+
+		static Ref<UniformBuffer> Create(uint32_t* indices, uint32_t count);
+		static Ref<UniformBuffer> Create(std::vector<uint32_t> indices);
+
+	};
 }

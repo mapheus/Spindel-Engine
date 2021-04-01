@@ -37,6 +37,11 @@ namespace Spindel {
 
 		Ref<Framebuffer> m_Framebuffer;
 
+		Ref<VertexArray> m_Vao;
+		Ref<VertexBuffer> m_Vbo;
+		Ref<IndexBuffer> m_Ibo;
+		Ref<BufferLayout> m_Layout;
+
 		glm::vec2 m_ViewportSize = { 0,0 };
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 

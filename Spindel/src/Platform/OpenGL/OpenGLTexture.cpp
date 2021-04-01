@@ -11,6 +11,7 @@ namespace Spindel {
 		Resource::SetPath(path.c_str());
 
 		data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		SP_WARN("{0}", path.c_str());
 		SP_CORE_ASSERT(data, "Failed to load image! Path: {0}", path.c_str());
 
 		m_Width = width;

@@ -35,7 +35,6 @@ namespace Spindel
     void Cache::removeLoader(const Loader* loader)
     {
         const auto i = std::find_if(loaders.begin(), loaders.end(), [loader](const auto& ownedLoader) noexcept {
-            return false;
             return loader == ownedLoader.get();
             });
         if (i != loaders.end())

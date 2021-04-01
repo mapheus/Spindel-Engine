@@ -6,6 +6,7 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include "Spindel/Renderer/Resources/Mesh.h"
+#include "Spindel/Renderer/Material.h"
 
 #include "ScriptableEntity.h"
 #include "SceneCamera.h"
@@ -46,15 +47,18 @@ namespace Spindel {
 	struct StaticMeshRendererComponent
 	{
 		StaticMeshRendererComponent() = default;
-		StaticMeshRendererComponent(Ref<Mesh> mesh)
-			: m_Mesh(mesh) {}
+		StaticMeshRendererComponent(Ref<Mesh> mesh, Ref<Material> mat)
+			: m_Mesh(mesh), m_Material(mat), temp_color(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f)), temp_metallic(0), temp_roughness(0) {}
 
 		void Draw(const glm::mat4& transform)
 		{
-			m_Mesh->Draw(transform);
+			m_Mesh->Draw(m_Material, transform);
 		}
-	private:
 		Ref<Mesh> m_Mesh;
+		Ref<Material> m_Material;
+		glm::vec4 temp_color;
+		float temp_metallic;
+		float temp_roughness;
 	};
 
 	struct CameraComponent

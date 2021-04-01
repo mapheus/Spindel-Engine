@@ -66,8 +66,8 @@ namespace Spindel
 	}
 
 
-	void OpenGLMesh::Draw(const glm::mat4& transform)
+	void OpenGLMesh::Draw(Ref<Material>& material, const glm::mat4& transform)
 	{
-		Renderer::Submit(m_Vao, transform, m_Textures);
+		Renderer::Submit(material, m_Vao, transform);
 	}
 }
