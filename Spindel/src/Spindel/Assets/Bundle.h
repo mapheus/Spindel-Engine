@@ -33,7 +33,7 @@ namespace Spindel
         bool mipmaps;
     };
 
-    class Bundle
+    class Bundle : public RefCounted
     {
         friend Cache;
     public:

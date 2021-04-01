@@ -4,11 +4,14 @@
 
 namespace Spindel
 {
-	class Entity {
+	class Entity{
 	public:
 		Entity() = default;
-		Entity(entt::entity handle, Scene* scene);
-		Entity(const Entity& other) = default;
+		Entity(entt::entity handle, Scene * scene)
+			: m_EntityHandle(handle), m_Scene(scene) {}
+
+		~Entity() {}
+
 
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args)

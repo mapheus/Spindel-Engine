@@ -28,7 +28,7 @@ namespace Spindel
 		Ref<VertexArray> m_Vao;
 		Ref<VertexBuffer> m_Vbo;
 		Ref<IndexBuffer> m_Ibo;
-		Ref<BufferLayout> m_Layout;
+		BufferLayout m_Layout;
 
 		std::vector<Ref<Texture2D>> m_Textures;
 	};

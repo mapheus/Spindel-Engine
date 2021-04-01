@@ -111,7 +111,7 @@ namespace Spindel {
 		uint32_t m_Stride = 0;
 	};
 
-	class VertexBuffer
+	class VertexBuffer : public RefCounted
 	{
 	public:
 		virtual ~VertexBuffer() {}
@@ -126,7 +126,7 @@ namespace Spindel {
 		static Ref<VertexBuffer> Create(std::vector<Vertex> vertices, size_t size);
 	};
 
-	class IndexBuffer
+	class IndexBuffer : public RefCounted
 	{
 	public:
 		virtual ~IndexBuffer() {}

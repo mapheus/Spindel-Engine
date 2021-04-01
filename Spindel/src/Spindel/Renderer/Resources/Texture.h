@@ -10,7 +10,7 @@
 
 namespace Spindel {
 
-	class Texture : public Resource
+	class Texture : public RefCounted
 	{
 	public:
 		virtual ~Texture() = default;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "Ref.h"
 
 #ifdef SP_PLATFORM_WINDOWS
 	#if SP_DYNAMIC_LINK
@@ -34,14 +35,6 @@ namespace Spindel {
 	typename Scope<T> CreateScope(Args&& ... args)
 	{
 		return std::make_unique<T>(std::forward<Args>(args)...);
-	}
-
-	template<typename T>
-	using Ref = std::shared_ptr<T>;
-	template<typename T, typename ... Args>
-	typename Ref<T> CreateRef(Args&& ... args)
-	{
-		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 
 }

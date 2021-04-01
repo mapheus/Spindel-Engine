@@ -10,7 +10,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLVertexBuffer>(vertices, size);
+		case RendererAPI::API::OpenGL:	return Ref<OpenGLVertexBuffer>::Create(vertices, size);
 
 		}
 
@@ -23,7 +23,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLVertexBuffer>(vertices, size);
+		case RendererAPI::API::OpenGL:	return Ref<OpenGLVertexBuffer>::Create (vertices, size);
 
 		}
 
@@ -36,7 +36,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLIndexBuffer>(indices, count);
+		case RendererAPI::API::OpenGL:	return Ref<OpenGLIndexBuffer>::Create(indices, count);
 
 		}
 
@@ -49,7 +49,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLIndexBuffer>(indices);
+		case RendererAPI::API::OpenGL:	return Ref<OpenGLIndexBuffer>::Create(indices);
 
 		}
 

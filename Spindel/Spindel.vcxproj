@@ -157,6 +157,7 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Spindel.h" />
+    <ClInclude Include="src\Spindel\Assets\AssetManager.h" />
     <ClInclude Include="src\Spindel\Assets\Bundle.h" />
     <ClInclude Include="src\Spindel\Assets\Cache.h" />
     <ClInclude Include="src\Spindel\Assets\ImageLoader.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="src\Spindel\Core\Layer.h" />
     <ClInclude Include="src\Spindel\Core\LayerStack.h" />
     <ClInclude Include="src\Spindel\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\Spindel\Core\Ref.h" />
     <ClInclude Include="src\Spindel\Core\Singleton.h" />
     <ClInclude Include="src\Spindel\Core\Timestep.h" />
     <ClInclude Include="src\Spindel\Core\Window.h" />
@@ -630,6 +632,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Spindel\Assets\AssetManager.cpp" />
     <ClCompile Include="src\Spindel\Assets\Bundle.cpp" />
     <ClCompile Include="src\Spindel\Assets\Cache.cpp" />
     <ClCompile Include="src\Spindel\Assets\ImageLoader.cpp" />

@@ -41,6 +41,7 @@ namespace Spindel
             // the node object only contains indices to index the actual objects in the scene. 
             // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+            SP_WARN("Meshname: {0}", mesh->mName.C_Str());
             m_Bundle->setMesh(std::string(mesh->mName.C_Str()), ProcessMesh(mesh, scene));
         }
         // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
@@ -165,7 +166,7 @@ namespace Spindel
             std::string s = std::string(str.C_Str());
             s = s.substr(s.find_last_of('/') + 1, s.back());
             Ref<Texture2D> temp = m_Bundle->getTexture(s.c_str());
-            if (temp != nullptr)
+            if (temp.Raw() != nullptr)
             {
                 textures.push_back(temp);
                 skip = true;

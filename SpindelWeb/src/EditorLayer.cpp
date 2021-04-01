@@ -23,18 +23,15 @@ namespace Spindel {
 
 	void EditorLayer::OnAttach()
 	{
-		m_Cache = CreateRef<Cache>();
-		m_Bundle = CreateRef<Bundle>(m_Cache);
-		m_Bundle->loadAsset(Loader::Type::image, "bomb", "assets/textures/bomb.png");
-		m_Bundle->loadAsset(Loader::Type::staticMesh, "asd", "assets/models/test/test.fbx");
 
 		FramebufferSpecification fbSpec;
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
-		m_ActiveScene = CreateRef<Scene>();
 		m_EditorCamera = EditorCamera(30.f, 1.778f, 0.1f, 1000.0f);
+
+		m_ActiveScene = Ref<Scene>::Create();
 
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
 		m_CameraEntity.AddComponent<CameraComponent>();
@@ -42,7 +39,7 @@ namespace Spindel {
 		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
 		cc.Primary = false;
 
-		m_SceneHierarchyPanel = SceneHierarchyPanel(m_ActiveScene, m_Cache);
+		m_SceneHierarchyPanel = SceneHierarchyPanel(m_ActiveScene);
 
 	}
 

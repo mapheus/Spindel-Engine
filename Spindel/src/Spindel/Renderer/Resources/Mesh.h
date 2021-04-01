@@ -11,7 +11,7 @@
 
 namespace Spindel {
 
-	class Mesh : public Resource
+	class Mesh : public RefCounted
 	{
 	public:
 		virtual ~Mesh() = default;

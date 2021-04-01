@@ -84,7 +84,7 @@ namespace Spindel {
 		RenderCommand::DrawIndexed(vertexArray);
 	}
 
-	void Renderer::DrawMesh(const Ref<Mesh>& mesh, const glm::mat4& transform)
+	void Renderer::DrawMesh(Ref<Mesh> mesh, const glm::mat4& transform)
 	{
 		mesh->Draw(transform);
 	}

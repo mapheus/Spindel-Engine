@@ -11,7 +11,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLShader>(path);
+		case RendererAPI::API::OpenGL:	return Ref<OpenGLShader>::Create(path);
 
 		}
 
@@ -23,7 +23,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLShader>(vertexSrc, fragmentSrc);
+		case RendererAPI::API::OpenGL:	return Ref<OpenGLShader>::Create(vertexSrc, fragmentSrc);
 
 		}
 

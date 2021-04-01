@@ -10,7 +10,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLVertexArray>();
+		case RendererAPI::API::OpenGL:	return Ref<OpenGLVertexArray>::Create();
 
 		}
 

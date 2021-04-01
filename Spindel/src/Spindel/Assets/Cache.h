@@ -14,7 +14,7 @@ namespace Spindel
     class Bundle;
     class Loader;
 
-    class Cache
+    class Cache : public RefCounted
     {
         friend Bundle;
     public:

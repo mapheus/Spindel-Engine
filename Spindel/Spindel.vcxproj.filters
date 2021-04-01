@@ -1490,6 +1490,8 @@
     </ClInclude>
     <ClInclude Include="src\Spindel\Assets\ModelLoader.h" />
     <ClInclude Include="src\Spindel\Core\Singleton.h" />
+    <ClInclude Include="src\Spindel\Assets\AssetManager.h" />
+    <ClInclude Include="src\Spindel\Core\Ref.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1610,5 +1612,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Assets\ModelLoader.cpp" />
+    <ClCompile Include="src\Spindel\Assets\AssetManager.cpp" />
   </ItemGroup>
 </Project>

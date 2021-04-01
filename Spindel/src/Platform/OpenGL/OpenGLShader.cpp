@@ -28,7 +28,6 @@ namespace Spindel {
 	OpenGLShader::OpenGLShader(const std::string& path)
 		: m_Name("Shader")
 	{
-		Resource::SetPath(path);
 		std::string source = ReadFile(path);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);

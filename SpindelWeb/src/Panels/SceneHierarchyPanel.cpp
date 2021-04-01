@@ -15,8 +15,7 @@
 
 namespace Spindel
 {
-	SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& scene, Ref<Cache> cache)
-		: m_Cache(cache)
+	SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& scene)
 	{
 		SetContext(scene);
 	}
@@ -46,7 +45,7 @@ namespace Spindel
 		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 20, 200 });
 		m_Context->m_Registry.each([&](auto entityID)
 		{
-			Entity entity{ entityID, m_Context.get() };
+			Entity entity(entityID, m_Context.Raw());
 			DrawEntityNode(entity);
 		});
 		ImGui::PopStyleVar();
@@ -276,7 +275,7 @@ namespace Spindel
 			if (ImGui::MenuItem("StaticMeshRenderer"))
 			{
 				if (!m_SelectionContext.HasComponent<StaticMeshRendererComponent>())
-					m_SelectionContext.AddComponent<StaticMeshRendererComponent>(m_Cache->getMesh("Cube"));
+					m_SelectionContext.AddComponent<StaticMeshRendererComponent>(AssetManager::getMesh("Cube"));
 				else
 					SP_CORE_WARN("This entity already has the Mesh Component!");
 				ImGui::CloseCurrentPopup();

@@ -4,7 +4,7 @@
 #include <memory>
 
 namespace Spindel {
-	class VertexArray
+	class VertexArray : public RefCounted
 	{
 	public:
 		virtual ~VertexArray() {}
@@ -12,13 +12,13 @@ namespace Spindel {
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		virtual void AddVertexBuffers(const std::shared_ptr<VertexBuffer>& vertexBuffer) = 0;
-		virtual void AddIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) = 0;
+		virtual void AddVertexBuffers(const Ref<VertexBuffer>& vertexBuffer) = 0;
+		virtual void AddIndexBuffer(const Ref<IndexBuffer>& indexBuffer) = 0;
 
 		virtual uint32_t GetID() = 0;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const = 0;
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const = 0;
+		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const = 0;
+		virtual const Ref<IndexBuffer>& GetIndexBuffer() const = 0;
 
 		static Ref<VertexArray> Create();
 	};

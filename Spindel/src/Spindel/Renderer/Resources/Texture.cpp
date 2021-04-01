@@ -11,7 +11,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    SP_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return CreateRef<OpenGLTexture2D>(path, name);
+		case RendererAPI::API::OpenGL:  return Ref<OpenGLTexture2D>::Create(path, name);
 		}
 
 		SP_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -23,7 +23,7 @@ namespace Spindel {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    SP_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return CreateRef<OpenGLTexture2D>(data, width, height, channels);
+		case RendererAPI::API::OpenGL:  return Ref<OpenGLTexture2D>::Create(data, width, height, channels);
 		}
 
 		SP_CORE_ASSERT(false, "Unknown RendererAPI!");
