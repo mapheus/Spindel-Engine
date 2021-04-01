@@ -6,28 +6,65 @@
 
 namespace Spindel {
 
-	Ref<Texture2D> Texture2D::Create(const std::string& path, const std::string& name)
-	{
-		switch (Renderer::GetAPI())
-		{
-		case RendererAPI::API::None:    SP_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return CreateRef<OpenGLTexture2D>(path, name);
-		}
 
-		SP_CORE_ASSERT(false, "Unknown RendererAPI!");
+	Ref<Texture2D> Texture2D::Create(TextureFormat format, unsigned int width, unsigned int height, TextureWrap wrap)
+	{
+		switch (RendererAPI::Current())
+		{
+		case RendererAPIType::None: return nullptr;
+		case RendererAPIType::OpenGL: return Ref<OpenGLTexture2D>::Create(format, width, height, wrap);
+		}
 		return nullptr;
 	}
 
-	Ref<Texture2D> Texture2D::Create(stbi_uc* data, uint32_t width, uint32_t height, uint32_t channels)
+	Ref<Texture2D> Texture2D::Create(const std::string& path, bool srgb, TextureWrap wrap)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::Current())
 		{
-		case RendererAPI::API::None:    SP_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return CreateRef<OpenGLTexture2D>(data, width, height, channels);
+		case RendererAPIType::None: return nullptr;
+		case RendererAPIType::OpenGL: return Ref<OpenGLTexture2D>::Create(path, srgb, wrap);
 		}
-
-		SP_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
+
+	Ref<TextureCube> TextureCube::Create(TextureFormat format, uint32_t width, uint32_t height)
+	{
+		switch (RendererAPI::Current())
+		{
+		case RendererAPIType::None: return nullptr;
+		case RendererAPIType::OpenGL: return Ref<OpenGLTextureCube>::Create(format, width, height);
+		}
+		return nullptr;
+	}
+
+	Ref<TextureCube> TextureCube::Create(const std::string& path)
+	{
+		switch (RendererAPI::Current())
+		{
+		case RendererAPIType::None: return nullptr;
+		case RendererAPIType::OpenGL: return Ref<OpenGLTextureCube>::Create(path);
+		}
+		return nullptr;
+	}
+
+	uint32_t Texture::GetBPP(TextureFormat format)
+	{
+		switch (format)
+		{
+		case TextureFormat::RGB:    return 3;
+		case TextureFormat::RGBA:   return 4;
+		}
+		return 0;
+	}
+
+	uint32_t Texture::CalculateMipMapCount(uint32_t width, uint32_t height)
+	{
+		uint32_t levels = 1;
+		while ((width | height) >> levels)
+			levels++;
+
+		return levels;
+	}
+
 
 }

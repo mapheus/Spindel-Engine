@@ -7,14 +7,14 @@
 #include "Bundle.h"
 #include "Spindel/Renderer/Resources/Texture.h"
 #include "Spindel/Renderer/Resources/Shader.h"
-#include "Spindel/Renderer/Resources/Mesh.h"
+//#include "Spindel/Renderer/Resources/Mesh.h"
 
 namespace Spindel
 {
     class Bundle;
     class Loader;
 
-    class Cache
+    class Cache : public RefCounted
     {
         friend Bundle;
     public:
@@ -31,7 +31,7 @@ namespace Spindel
 
         Ref<Texture2D> getTexture(const std::string& name) const;
         const Ref<Shader> getShader(const std::string& name) const;
-        const Ref<Mesh> getMesh(const std::string& name) const;
+        //const Ref<Mesh> getMesh(const std::string& name) const;
 
     private:
         void addBundle(const Bundle* bundle);

@@ -10,7 +10,24 @@
 
 namespace Spindel {
 
-	class Texture : public Resource
+	enum class TextureFormat
+	{
+		None = 0,
+		RGB = 1,
+		RGBA = 2,
+		Float16 = 3
+	};
+
+	enum class TextureWrap
+	{
+		None = 0,
+		Clamp = 1,
+		Repeat = 2
+	};
+
+
+
+	class Texture : public RefCounted
 	{
 	public:
 		virtual ~Texture() = default;
@@ -28,6 +45,15 @@ namespace Spindel {
 	public:
 		static Ref<Texture2D> Create(const std::string& path, const std::string& name = "Default");
 		static Ref<Texture2D> Create(stbi_uc* data, uint32_t width, uint32_t height, uint32_t channels);
+	};
+
+	class TextureCube : public Texture
+	{
+	public:
+		static Ref<TextureCube> Create(TextureFormat format, uint32_t width, uint32_t height);
+		static Ref<TextureCube> Create(const std::string& path);
+
+		virtual const std::string& GetPath() const = 0;
 	};
 
 }

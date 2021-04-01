@@ -11,10 +11,9 @@
 
 #include "Spindel/Renderer/Framebuffer.h"
 #include "Spindel/Renderer/Renderer.h"
-#include "Spindel/Renderer/Buffer.h"
+#include "Spindel/Renderer/VertexBuffer.h"
 #include "Spindel/Renderer/Resources/Shader.h"
 #include "Spindel/Renderer/Resources/Texture.h"
-#include "Spindel/Renderer/VertexArray.h"
 #include "Spindel/Scene/PerspectiveCamera.h"
 #include "Spindel/Scene/PerspectiveFPSCameraController.h"
 

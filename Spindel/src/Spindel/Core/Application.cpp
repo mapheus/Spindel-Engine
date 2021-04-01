@@ -4,8 +4,13 @@
 #include "Input.h"
 
 #include "Spindel/Renderer/Renderer.h"
+#include "Spindel/Renderer/Framebuffer.h"
 
 #include "GLFW/glfw3.h"
+
+#include <GLFW/glfw3native.h>
+#include <Windows.h>
+
 
 namespace Spindel {
 
@@ -23,6 +28,7 @@ namespace Spindel {
 		m_Window->SetEventCallback(SP_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
+		AssetManager::Init(m_Cache, m_Bundle);
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -106,7 +112,22 @@ namespace Spindel {
 
 	bool Application::OnWindowResized(WindowResizeEvent& e)
 	{
-		Renderer::OnWindowResized(e.GetWidth(), e.GetHeight());
-		return true;
+		int width = e.GetWidth(), height = e.GetHeight();
+		if (width == 0 || height == 0)
+		{
+			m_Minimized = true;
+			return false;
+		}
+		m_Minimized = false;
+		Renderer::Submit([=]() { glViewport(0, 0, width, height); });
+		auto& fbs = FramebufferPool::GetGlobal()->GetAll();
+		for (auto& fb : fbs)
+		{
+			if (!fb->GetSpecification().NoResize)
+				fb->Resize(width, height);
+		}
+
+		return false;
+
 	}
 }

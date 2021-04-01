@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "Cache.h"
 #include "ImageLoader.h"
-#include "ModelLoader.h"
+//#include "ModelLoader.h"
 
 namespace Spindel
 {
@@ -11,7 +11,7 @@ namespace Spindel
     Cache::Cache()
     {
         addLoader(CreateScope<ImageLoader>(*this));
-        addLoader(CreateScope<ModelLoader>(*this));
+        //addLoader(CreateScope<ModelLoader>(*this));
     }
 
     void Cache::addBundle(const Bundle* bundle)
@@ -62,7 +62,7 @@ namespace Spindel
         return nullptr;
     }
 
-
+    /*
     const Ref<Mesh> Cache::getMesh(const std::string& name) const
     {
         for (const auto bundle : bundles)
@@ -73,4 +73,5 @@ namespace Spindel
 
         return nullptr;
     }
+    */
 }

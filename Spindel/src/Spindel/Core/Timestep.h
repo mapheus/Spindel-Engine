@@ -5,15 +5,15 @@ namespace Spindel {
 	class Timestep
 	{
 	public:
-		Timestep(float time = 0.0f)
-			: m_Time(time)
-		{
+		Timestep() {}
+		Timestep(float time);
 
-		}
+		inline float GetSeconds() const { return m_Time; }
+		inline float GetMilliseconds() const { return m_Time * 1000.0f; }
 
-		double GetSeconds() const { return m_Time; }
-		double GetMilliseconds() const { return m_Time * 1000.f; }
+		operator float() { return m_Time; }
 	private:
-		double m_Time;
+		float m_Time = 0.0f;
 	};
+
 }

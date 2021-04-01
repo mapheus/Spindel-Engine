@@ -31,8 +31,6 @@ namespace Spindel {
 		bool OnKeyPressed(KeyPressedEvent& e);
 
 	private:
-		Ref<Cache> m_Cache;
-		Ref<Bundle> m_Bundle;
 		EditorCamera m_EditorCamera;
 
 		Ref<Framebuffer> m_Framebuffer;

@@ -6,7 +6,7 @@
 
 namespace Spindel {
 
-	class Shader : public Resource
+	class Shader : public RefCounted
 	{
 	public:
 		virtual ~Shader() = default;

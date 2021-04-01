@@ -23,7 +23,7 @@ namespace Spindel
 		}
 	};
 
-	class SPINDEL_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

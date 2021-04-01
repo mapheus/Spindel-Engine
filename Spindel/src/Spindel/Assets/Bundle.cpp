@@ -16,7 +16,7 @@ namespace Spindel
     Bundle::~Bundle()
     {
         textures.clear();
-        staticMesh.clear();
+        //staticMesh.clear();
         shaders.clear();
         m_Cache->removeBundle(this);
     }
@@ -80,7 +80,7 @@ namespace Spindel
         shaders.clear();
     }
 
-
+    /*
     const Ref<Mesh> Bundle::getMesh(const std::string& name) const
     {
         if (const auto i = staticMesh.find(name); i != staticMesh.end())
@@ -97,4 +97,5 @@ namespace Spindel
     {
         staticMesh.clear();
     }
+    */
 }

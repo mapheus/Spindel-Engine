@@ -1,7 +1,5 @@
 #include "sppch.h"
-#include "Spindel/Renderer/Framebuffer.h"
-
-#include "Spindel/Renderer/Renderer.h"
+#include "Framebuffer.h"
 
 #include "Platform/OpenGL/OpenGLFramebuffer.h"
 
@@ -9,14 +7,38 @@ namespace Spindel {
 
 	Ref<Framebuffer> Framebuffer::Create(const FramebufferSpecification& spec)
 	{
-		switch (Renderer::GetAPI())
-		{
-		case RendererAPI::API::None:    SP_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return CreateRef<OpenGLFramebuffer>(spec);
-		}
+		Ref<Framebuffer> result = nullptr;
 
-		SP_CORE_ASSERT(false, "Unknown RendererAPI!");
-		return nullptr;
+		switch (RendererAPI::Current())
+		{
+		case RendererAPIType::None:		return nullptr;
+		case RendererAPIType::OpenGL:	result = Ref<OpenGLFramebuffer>::Create(spec);
+		}
+		FramebufferPool::GetGlobal()->Add(result);
+		return result;
+	}
+
+	FramebufferPool* FramebufferPool::s_Instance = new FramebufferPool;
+
+	FramebufferPool::FramebufferPool(uint32_t maxFBs /* = 32 */)
+	{
+
+	}
+
+	FramebufferPool::~FramebufferPool()
+	{
+
+	}
+
+	std::weak_ptr<Framebuffer> FramebufferPool::AllocateBuffer()
+	{
+		// m_Pool.push_back();
+		return std::weak_ptr<Framebuffer>();
+	}
+
+	void FramebufferPool::Add(const Ref<Framebuffer>& framebuffer)
+	{
+		m_Pool.push_back(framebuffer);
 	}
 
 }

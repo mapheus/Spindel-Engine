@@ -7,7 +7,7 @@
 #include "Spindel/Events/KeyEvent.h"
 
 namespace Spindel {
-	class SPINDEL_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

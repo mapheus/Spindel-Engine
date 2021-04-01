@@ -3,7 +3,7 @@
 
 namespace Spindel
 {
-	class SPINDEL_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
@@ -43,7 +43,7 @@ namespace Spindel
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class SPINDEL_API AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent() = default;

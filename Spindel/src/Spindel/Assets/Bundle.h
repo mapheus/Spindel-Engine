@@ -1,13 +1,12 @@
 #pragma once
 
 #include <map>
-#include <memory>
 #include <string>
 #include "Loader.h"
 #include "Cache.h"
 #include "Spindel/Renderer/Resources/Texture.h"
 #include "Spindel/Renderer/Resources/Shader.h"
-#include "Spindel/Renderer/Resources/Mesh.h"
+//#include "Spindel/Renderer/Resources/Mesh.h"
 
 namespace Spindel
 {
@@ -33,7 +32,7 @@ namespace Spindel
         bool mipmaps;
     };
 
-    class Bundle
+    class Bundle : public RefCounted
     {
         friend Cache;
     public:
@@ -58,8 +57,8 @@ namespace Spindel
         void setShader(const std::string& name, Ref<Shader> shader);
         void releaseShaders();
 
-        const Ref<Mesh> getMesh(const std::string& name) const;
-        void setMesh(const std::string& name, Ref<Mesh>& newStaticMesh);
+        //const Ref<Mesh> getMesh(const std::string& name) const;
+        //void setMesh(const std::string& name, Ref<Mesh>& newStaticMesh);
         void releaseStaticMesh();
 
     private:
@@ -67,7 +66,7 @@ namespace Spindel
 
         std::map<std::string, Ref<Texture2D>> textures;
         std::map<std::string, Ref<Shader>> shaders;
-        std::map<std::string, Ref<Mesh>> staticMesh;
+        //std::map<std::string, Ref<Mesh>> staticMesh;
 
     };
 }

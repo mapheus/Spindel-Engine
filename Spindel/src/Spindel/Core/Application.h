@@ -11,9 +11,11 @@
 
 #include "Spindel/Core/Timestep.h"
 
+#include "Spindel/Assets/AssetManager.h"
+
 namespace Spindel {
 
-	class SPINDEL_API Application
+	class Application
 	{
 	public:
 		Application(const std::string& title = "Spindel App");
@@ -36,10 +38,13 @@ namespace Spindel {
 		bool OnWindowClosed(WindowCloseEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);
 	private:
-		Ref<Window> m_Window;
+		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
-		bool m_Running = true;
+		bool m_Running = true, m_Minimized = false;
 		LayerStack m_LayerStack;
+
+		Ref<Cache> m_Cache;
+		Ref<Bundle> m_Bundle;
 
 		double m_UpdatePeriod;
 		double m_Accumalator;

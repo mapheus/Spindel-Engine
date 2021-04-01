@@ -1,5 +1,5 @@
 #pragma once
-#include "Spindel/Core/Core.h"
+#include "sppch.h"
 
 namespace Spindel {
 
@@ -28,7 +28,7 @@ namespace Spindel {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class SPINDEL_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 	public:

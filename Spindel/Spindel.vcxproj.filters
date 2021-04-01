@@ -78,28 +78,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLMesh.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
@@ -177,7 +165,7 @@
     <ClInclude Include="src\Spindel\Math\Math.h">
       <Filter>src\Spindel\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\Buffer.h">
+    <ClInclude Include="src\Spindel\Renderer\VertexBuffer.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Camera.h">
@@ -192,7 +180,7 @@
     <ClInclude Include="src\Spindel\Renderer\GraphicsContext.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\RenderCommand.h">
+    <ClInclude Include="src\Spindel\Renderer\RenderCommandQueue.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Renderer.h">
@@ -201,17 +189,11 @@
     <ClInclude Include="src\Spindel\Renderer\RendererAPI.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\Resources\Mesh.h">
-      <Filter>src\Spindel\Renderer\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Resources\Shader.h">
       <Filter>src\Spindel\Renderer\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Resources\Texture.h">
       <Filter>src\Spindel\Renderer\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\VertexArray.h">
-      <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Scene\Components.h">
       <Filter>src\Spindel\Scene</Filter>
@@ -1488,20 +1470,22 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Spindel\Assets\ModelLoader.h" />
     <ClInclude Include="src\Spindel\Core\Singleton.h" />
+    <ClInclude Include="src\Spindel\Core\Ref.h" />
+    <ClInclude Include="src\Spindel\Renderer\IndexBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h" />
+    <ClInclude Include="src\Spindel\Core\Buffer.h" />
+    <ClInclude Include="src\Spindel\Assets\AssetManager.h" />
+    <ClInclude Include="src\Spindel\Renderer\RenderPass.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRenderPass.h" />
+    <ClInclude Include="src\Spindel\Core\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLMesh.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1511,9 +1495,6 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -1555,7 +1536,7 @@
     <ClCompile Include="src\Spindel\Math\Math.cpp">
       <Filter>src\Spindel\Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\Buffer.cpp">
+    <ClCompile Include="src\Spindel\Renderer\VertexBuffer.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\EditorCamera.cpp">
@@ -1564,26 +1545,17 @@
     <ClCompile Include="src\Spindel\Renderer\Framebuffer.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\RenderCommand.cpp">
+    <ClCompile Include="src\Spindel\Renderer\RenderCommandQueue.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Renderer.cpp">
       <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\RendererAPI.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\Resources\Mesh.cpp">
-      <Filter>src\Spindel\Renderer\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Resources\Shader.cpp">
       <Filter>src\Spindel\Renderer\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Resources\Texture.cpp">
       <Filter>src\Spindel\Renderer\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\VertexArray.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Scene\Entity.cpp">
       <Filter>src\Spindel\Scene</Filter>
@@ -1609,6 +1581,12 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Assets\ModelLoader.cpp" />
+    <ClCompile Include="src\Spindel\Renderer\IndexBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="src\Spindel\Assets\AssetManager.cpp" />
+    <ClCompile Include="src\Spindel\Renderer\RenderPass.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRenderPass.cpp" />
+    <ClCompile Include="src\Spindel\Core\TimeStep.cpp" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ namespace Spindel
 	{
 	public:
 		SceneHierarchyPanel() = default;
-		SceneHierarchyPanel(const Ref<Scene>& scene, Ref<Cache> cache);
+		SceneHierarchyPanel(const Ref<Scene>& scene);
 
 		void SetContext(const Ref<Scene>& scene);
 
@@ -26,6 +26,5 @@ namespace Spindel
 	private:
 		Ref<Scene> m_Context;
 		Entity m_SelectionContext;
-		Ref<Cache> m_Cache;
 	};
 }

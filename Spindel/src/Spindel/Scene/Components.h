@@ -5,7 +5,6 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "Spindel/Renderer/Resources/Mesh.h"
 
 #include "ScriptableEntity.h"
 #include "SceneCamera.h"
@@ -46,15 +45,15 @@ namespace Spindel {
 	struct StaticMeshRendererComponent
 	{
 		StaticMeshRendererComponent() = default;
-		StaticMeshRendererComponent(Ref<Mesh> mesh)
-			: m_Mesh(mesh) {}
+		StaticMeshRendererComponent()
+		{}
 
 		void Draw(const glm::mat4& transform)
 		{
-			m_Mesh->Draw(transform);
+			
 		}
 	private:
-		Ref<Mesh> m_Mesh;
+		
 	};
 
 	struct CameraComponent
