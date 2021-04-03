@@ -4,6 +4,7 @@
 #include "Cache.h"
 #include "ImageLoader.h"
 #include "ModelLoader.h"
+#include "ShaderLoader.h"
 
 namespace Spindel
 {
@@ -12,6 +13,7 @@ namespace Spindel
     {
         addLoader(CreateScope<ImageLoader>(*this));
         addLoader(CreateScope<ModelLoader>(*this));
+        addLoader(CreateScope<ShaderLoader>(*this));
     }
 
     void Cache::addBundle(const Bundle* bundle)

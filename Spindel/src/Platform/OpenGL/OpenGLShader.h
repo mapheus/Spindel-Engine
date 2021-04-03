@@ -10,8 +10,7 @@ namespace Spindel {
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource);
-		OpenGLShader(const std::string& path);
+		OpenGLShader(const std::string& source);
 		virtual ~OpenGLShader();
 
 		virtual void Bind() const override;
@@ -38,7 +37,6 @@ namespace Spindel {
 		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 
 	private:
-		std::string ReadFile(const std::string& path);
 		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
 		void Compile(std::unordered_map<GLenum, std::string>& shaderSources);
 

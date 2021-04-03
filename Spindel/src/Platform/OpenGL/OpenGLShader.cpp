@@ -16,42 +16,13 @@ namespace Spindel {
 		SP_CORE_ASSERT(false, "Unkown shader type!");
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
+	OpenGLShader::OpenGLShader(const std::string& source)
 		: m_Name("Shader")
 	{
-		std::unordered_map<GLenum, std::string> sources;
-		sources[GL_VERTEX_SHADER] = vertexSource;
-		sources[GL_FRAGMENT_SHADER] = fragmentSource;
-		Compile(sources);
-	}
-
-	OpenGLShader::OpenGLShader(const std::string& path)
-		: m_Name("Shader")
-	{
-		std::string source = ReadFile(path);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);
-		
 	}
 
-	std::string OpenGLShader::ReadFile(const std::string& path)
-	{
-		std::string result;
-		std::ifstream in(path, std::ios::in, std::ios::binary);
-		if (in)
-		{
-			in.seekg(0, std::ios::end);
-			result.resize(in.tellg());
-			in.seekg(0, std::ios::beg);
-			in.read(&result[0], result.size());
-			in.close();
-		}
-		else
-		{
-			SP_CORE_ERROR("Could not open file {0}", path);
-		}
-		return result;
-	}
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
 		std::unordered_map<GLenum, std::string> shaderSources;

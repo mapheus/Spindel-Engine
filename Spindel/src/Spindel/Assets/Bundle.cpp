@@ -72,7 +72,7 @@ namespace Spindel
 
     void Bundle::setShader(const std::string& name, Ref<Shader> shader)
     {
-        shaders[name] = std::move(shader);
+        shaders[name] = shader;
     }
 
     void Bundle::releaseShaders()

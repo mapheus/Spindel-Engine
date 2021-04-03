@@ -15,7 +15,8 @@ namespace Spindel
         enum class Type
         {
             staticMesh,
-            image
+            image,
+            shader
         };
 
         Loader(Cache& initCache, Type initType) :
@@ -33,8 +34,7 @@ namespace Spindel
 
         auto getType() const noexcept { return m_Type; }
 
-        virtual bool loadAsset(Bundle& bundle,
-            const std::string& name,
+        virtual bool loadAsset(Bundle& bundle, const std::string& name,
             const std::string& filename,
             bool mipmaps = true) = 0;
 

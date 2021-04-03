@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "Spindel/Renderer/Resources/Texture.h"
 
+#include "Spindel/Assets/AssetManager.h"
+
 namespace Spindel {
 
 	struct QuadVertex
@@ -43,10 +45,32 @@ namespace Spindel {
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
-
-		s_Data.TextureShader = Shader::Create("assets/shaders/Texture.glsl");
+		AssetManager::loadAsset(Loader::Type::shader, "grid", "assets/shaders/Grid.glsl");
+		AssetManager::loadAsset(Loader::Type::shader, "texture", "assets/shaders/Texture.glsl");
+		s_Data.TextureShader = AssetManager::getShader("texture");
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetInt("u_Texture", 0);
+
+		float vertices[6 * 3] =
+		{
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f
+		};
+
+
+		s_Data.QuadVertexArray = VertexArray::Create();
+
+		s_Data.QuadVertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
+
+		BufferLayout layout = {
+			{ ShaderDataType::Float3, "a_Position" }
+		};
+		s_Data.QuadVertexBuffer->SetLayout(layout);
+		s_Data.QuadVertexArray->AddVertexBuffers(s_Data.QuadVertexBuffer);
 	}
 
 	void Renderer::BeginScene(const Camera& camera, const glm::mat4& transform)

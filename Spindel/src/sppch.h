@@ -14,6 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <fstream>
+
 #ifdef SP_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

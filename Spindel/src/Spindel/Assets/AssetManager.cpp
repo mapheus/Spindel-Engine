@@ -26,7 +26,7 @@ namespace Spindel
 	}
 	const Ref<Shader> AssetManager::getShader(const std::string& name)
 	{
-		return Ref<Shader>();
+		return s_AssetsData.cache->getShader(name);
 	}
 	const Ref<Mesh> AssetManager::getMesh(const std::string& name)
 	{

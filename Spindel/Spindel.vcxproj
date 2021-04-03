@@ -163,6 +163,7 @@
     <ClInclude Include="src\Spindel\Assets\ImageLoader.h" />
     <ClInclude Include="src\Spindel\Assets\Loader.h" />
     <ClInclude Include="src\Spindel\Assets\ModelLoader.h" />
+    <ClInclude Include="src\Spindel\Assets\ShaderLoader.h" />
     <ClInclude Include="src\Spindel\Core\Application.h" />
     <ClInclude Include="src\Spindel\Core\Core.h" />
     <ClInclude Include="src\Spindel\Core\EntryPoint.h" />
@@ -637,6 +638,7 @@
     <ClCompile Include="src\Spindel\Assets\Cache.cpp" />
     <ClCompile Include="src\Spindel\Assets\ImageLoader.cpp" />
     <ClCompile Include="src\Spindel\Assets\ModelLoader.cpp" />
+    <ClCompile Include="src\Spindel\Assets\ShaderLoader.cpp" />
     <ClCompile Include="src\Spindel\Core\Application.cpp" />
     <ClCompile Include="src\Spindel\Core\IO\Log.cpp" />
     <ClCompile Include="src\Spindel\Core\IO\Resource.cpp" />
