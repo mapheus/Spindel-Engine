@@ -7,6 +7,8 @@
 
 #include "GLFW/glfw3.h"
 
+#include "imgui.h"
+
 namespace Spindel {
 
 	Application* Application::s_Instance = nullptr;
@@ -24,6 +26,7 @@ namespace Spindel {
 
 		AssetManager::Init(m_Cache, m_Bundle);
 		Renderer::Init();
+		Renderer::WaitAndRender();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -62,16 +65,32 @@ namespace Spindel {
 		m_LayerStack.PushOverlay(layer);
 	}
 
+	void Application::RenderImGui()
+	{
+		m_ImGuiLayer->Begin();
+
+		ImGui::Begin("Renderer");
+		auto& caps = RendererAPI::GetCapabilities();
+		ImGui::Text("Vendor: %s", caps.Vendor.c_str());
+		ImGui::Text("Renderer: %s", caps.Renderer.c_str());
+		ImGui::Text("Version: %s", caps.Version.c_str());
+		ImGui::Text("Frame Time: %.2fms\n", m_Timestep.GetMilliseconds());
+		ImGui::End();
+
+		for (Layer* layer : m_LayerStack)
+			layer->OnImGuiRender();
+
+		m_ImGuiLayer->End();
+	}
+
+
 	void Application::Run() 
 	{
 		
 		while (m_Running)
 		{
-			float newTime = glfwGetTime();
-			Timestep timestep = newTime - m_LastFrameTime;
-			m_LastFrameTime = newTime;
 
-			m_Accumalator += timestep.GetSeconds();
+			m_Accumalator += m_Timestep.GetSeconds();
 			while (m_Accumalator >= m_UpdatePeriod)
 			{
 				for (Layer* layer : m_LayerStack)
@@ -84,13 +103,19 @@ namespace Spindel {
 			for (Layer* layer : m_LayerStack)
 				layer->OnRender();
 
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-			m_ImGuiLayer->End();
+			// Render ImGui on render thread
+			Application* app = this;
+			Renderer::Submit([app]() { app->RenderImGui(); });
 
+
+			Renderer::WaitAndRender();
 			
 			m_Window->OnUpdate();
+
+			float time = glfwGetTime();
+			m_Timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
+
 		}
 	}
 
@@ -107,7 +132,7 @@ namespace Spindel {
 
 	bool Application::OnWindowResized(WindowResizeEvent& e)
 	{
-		Renderer::OnWindowResized(e.GetWidth(), e.GetHeight());
+		//Renderer::OnWindowResized(e.GetWidth(), e.GetHeight());
 		return true;
 	}
 }

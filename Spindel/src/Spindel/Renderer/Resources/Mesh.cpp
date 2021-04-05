@@ -1,17 +1,17 @@
 #include "sppch.h"
 #include "Mesh.h"
 
-#include "Spindel/Renderer/Renderer.h"
+#include "Spindel/Renderer/RendererAPI.h"
 
 #include "Platform/OpenGL/OpenGLMesh.h"
 
 namespace Spindel {
 	Ref<Mesh> Mesh::Create(const std::string& name)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::Current())
 		{
-		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return Ref<OpenGLMesh>::Create(name);
+		case RendererAPIType::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
+		case RendererAPIType::OpenGL:	return Ref<OpenGLMesh>::Create(name);
 
 		}
 
@@ -20,10 +20,10 @@ namespace Spindel {
 	}
 	Ref<Mesh> Mesh::Create(Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::Current())
 		{
-		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return Ref<OpenGLMesh>::Create(vao, vbo, ibo, textures);
+		case RendererAPIType::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
+		case RendererAPIType::OpenGL:	return Ref<OpenGLMesh>::Create(vao, vbo, ibo, textures);
 
 		}
 

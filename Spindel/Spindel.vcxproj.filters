@@ -90,9 +90,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLMesh.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -190,9 +187,6 @@
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\GraphicsContext.h">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Spindel\Renderer\RenderCommand.h">
       <Filter>src\Spindel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Spindel\Renderer\Renderer.h">
@@ -1493,6 +1487,8 @@
     <ClInclude Include="src\Spindel\Assets\AssetManager.h" />
     <ClInclude Include="src\Spindel\Core\Ref.h" />
     <ClInclude Include="src\Spindel\Assets\ShaderLoader.h" />
+    <ClInclude Include="src\Spindel\Renderer\RenderCommandQueue.h" />
+    <ClInclude Include="src\Spindel\Core\Buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1567,13 +1563,7 @@
     <ClCompile Include="src\Spindel\Renderer\Framebuffer.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\RenderCommand.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Renderer.cpp">
-      <Filter>src\Spindel\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Spindel\Renderer\RendererAPI.cpp">
       <Filter>src\Spindel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Spindel\Renderer\Resources\Mesh.cpp">
@@ -1615,5 +1605,6 @@
     <ClCompile Include="src\Spindel\Assets\ModelLoader.cpp" />
     <ClCompile Include="src\Spindel\Assets\AssetManager.cpp" />
     <ClCompile Include="src\Spindel\Assets\ShaderLoader.cpp" />
+    <ClCompile Include="src\Spindel\Renderer\RenderCommandQueue.cpp" />
   </ItemGroup>
 </Project>

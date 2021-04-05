@@ -26,6 +26,8 @@ namespace Spindel {
 
 		void OnEvent(Event& e);
 
+		void RenderImGui();
+
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
@@ -51,6 +53,7 @@ namespace Spindel {
 		Ref<Bundle> m_Bundle;
 	private:
 		static Application* s_Instance;
+		Timestep m_Timestep;
 
 	};
 

@@ -10,6 +10,7 @@ namespace Spindel {
 		// FramebufferFormat Format = 
 		uint32_t Samples = 1;
 
+		bool NoResize = false;
 		bool SwapChainTarget = false;
 	};
 

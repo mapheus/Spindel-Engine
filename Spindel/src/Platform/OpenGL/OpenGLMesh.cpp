@@ -8,6 +8,7 @@ namespace Spindel
 {
 	OpenGLMesh::OpenGLMesh(const std::string& name)
 	{
+		/*
 		float vertices[8 * 5] =
 		{
 		-10.f, -10.f, -10.f, 0.0f, 0.0f,
@@ -45,9 +46,10 @@ namespace Spindel
 
 		m_Ibo = IndexBuffer::Create(indices, 36);
 		m_Vao->AddIndexBuffer(m_Ibo);
-		Ref<Texture2D> tex = Texture2D::Create("assets/textures/mgsus.png");
+		Ref<Texture2D> tex = AssetManager::getTexture(";
 		m_Textures.push_back(tex);
 
+		*/
 	}
 
 	OpenGLMesh::OpenGLMesh(Ref<VertexArray>& vao, Ref<VertexBuffer>& vbo, Ref<IndexBuffer>& ibo, std::vector<Ref<Texture2D>>& textures)

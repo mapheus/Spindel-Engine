@@ -1,6 +1,9 @@
 #include "sppch.h"
 #include "ModelLoader.h"
 
+
+#include "Spindel/Assets/AssetManager.h"
+
 namespace Spindel
 {
 	ModelLoader::ModelLoader(Cache& cache)
@@ -177,7 +180,8 @@ namespace Spindel
             if (!skip)
             {
                 std::string filepath = m_Directory.c_str() + std::string(str.C_Str());
-                Ref<Texture2D> texture = Texture2D::Create(filepath, typeName);
+                AssetManager::loadAsset(Type::image, filepath, filepath);
+                Ref<Texture2D> texture = AssetManager::getTexture(filepath);
                 textures.push_back(texture);
                 m_Bundle->loadAsset(Type::image, s, filepath);
             }

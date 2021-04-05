@@ -2,15 +2,15 @@
 #include "Buffer.h"
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
-#include "Renderer.h"
+#include "RendererAPI.h"
 namespace Spindel {
 
 	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, size_t size)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::Current())
 		{
-		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return Ref<OpenGLVertexBuffer>::Create(vertices, size);
+		case RendererAPIType::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
+		case RendererAPIType::OpenGL:	return Ref<OpenGLVertexBuffer>::Create(vertices, size);
 
 		}
 
@@ -20,10 +20,10 @@ namespace Spindel {
 
 	Ref<VertexBuffer> VertexBuffer::Create(std::vector<Vertex> vertices, size_t size)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::Current())
 		{
-		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return Ref<OpenGLVertexBuffer>::Create (vertices, size);
+		case RendererAPIType::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
+		case RendererAPIType::OpenGL:	return Ref<OpenGLVertexBuffer>::Create (vertices, size);
 
 		}
 
@@ -33,10 +33,10 @@ namespace Spindel {
 
 	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::Current())
 		{
-		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return Ref<OpenGLIndexBuffer>::Create(indices, count);
+		case RendererAPIType::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
+		case RendererAPIType::OpenGL:	return Ref<OpenGLIndexBuffer>::Create(indices, count);
 
 		}
 
@@ -46,10 +46,10 @@ namespace Spindel {
 
 	Ref<IndexBuffer> IndexBuffer::Create(std::vector<uint32_t> indices)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::Current())
 		{
-		case RendererAPI::API::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
-		case RendererAPI::API::OpenGL:	return Ref<OpenGLIndexBuffer>::Create(indices);
+		case RendererAPIType::None:		SP_CORE_ASSERT(false, "RendererAPI::None is not supported!");  return nullptr;
+		case RendererAPIType::OpenGL:	return Ref<OpenGLIndexBuffer>::Create(indices);
 
 		}
 

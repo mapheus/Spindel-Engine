@@ -150,7 +150,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLMesh.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
@@ -165,6 +164,7 @@
     <ClInclude Include="src\Spindel\Assets\ModelLoader.h" />
     <ClInclude Include="src\Spindel\Assets\ShaderLoader.h" />
     <ClInclude Include="src\Spindel\Core\Application.h" />
+    <ClInclude Include="src\Spindel\Core\Buffer.h" />
     <ClInclude Include="src\Spindel\Core\Core.h" />
     <ClInclude Include="src\Spindel\Core\EntryPoint.h" />
     <ClInclude Include="src\Spindel\Core\IO\Log.h" />
@@ -189,7 +189,7 @@
     <ClInclude Include="src\Spindel\Renderer\EditorCamera.h" />
     <ClInclude Include="src\Spindel\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Spindel\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Spindel\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Spindel\Renderer\RenderCommandQueue.h" />
     <ClInclude Include="src\Spindel\Renderer\Renderer.h" />
     <ClInclude Include="src\Spindel\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Spindel\Renderer\Resources\Mesh.h" />
@@ -650,9 +650,8 @@
     <ClCompile Include="src\Spindel\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Spindel\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Spindel\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Spindel\Renderer\RenderCommandQueue.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Spindel\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Resources\Mesh.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Resources\Shader.cpp" />
     <ClCompile Include="src\Spindel\Renderer\Resources\Texture.cpp" />

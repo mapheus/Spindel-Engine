@@ -22,7 +22,7 @@ namespace Spindel
 	}
 	Ref<Texture2D> AssetManager::getTexture(const std::string& name)
 	{
-		return Ref<Texture2D>();
+		return s_AssetsData.cache->getTexture(name);
 	}
 	const Ref<Shader> AssetManager::getShader(const std::string& name)
 	{

@@ -19,7 +19,7 @@
 
 #ifdef SP_ENABLE_ASSERTS
 	#define SP_ASSERT(x, ...) { if(!(x)) {SP_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define SP_CORE_ASSERT(x, ...) { if(!(x)) {SP_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define SP_CORE_ASSERT(x, ...) { if(!(x)) {SP_CORE_WARN("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 	#define SP_ASSERT(x, ...)
 	#define SP_CORE_ASSERT(x, ...)
@@ -37,4 +37,5 @@ namespace Spindel {
 		return std::make_unique<T>(std::forward<Args>(args)...);
 	}
 
+	using byte = uint8_t;
 }

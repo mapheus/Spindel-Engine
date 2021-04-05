@@ -3,6 +3,8 @@
 
 #include <glad/glad.h>
 
+#include "Spindel/Renderer/Renderer.h"
+
 namespace Spindel {
 
 
@@ -51,13 +53,20 @@ namespace Spindel {
 
 	void OpenGLFramebuffer::Bind()
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
-		glViewport(0, 0, m_Specification.Width, m_Specification.Height);
+		Ref<const OpenGLFramebuffer> instance = this;
+		Renderer::Submit([instance]() {
+			glBindFramebuffer(GL_FRAMEBUFFER, instance->m_RendererID);
+			glViewport(0, 0, instance->GetSpecification().Width, instance->GetSpecification().Height);
+			});
+
 	}
 
 	void OpenGLFramebuffer::Unbind()
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		Renderer::Submit([]() {
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			});
+
 	}
 
 	void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)

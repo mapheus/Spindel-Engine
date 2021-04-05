@@ -65,8 +65,7 @@ namespace Spindel {
 	void EditorLayer::OnRender()
 	{
 		m_Framebuffer->Bind();
-		Spindel::RenderCommand::SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
-		Spindel::RenderCommand::Clear();
+		Renderer::Clear(0.5f, 0.5f, 0.3f, 1.0f);
 
 		m_ActiveScene->OnUpdateEditor(m_EditorCamera);
 
